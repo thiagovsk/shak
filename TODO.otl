@@ -29,7 +29,7 @@
 [_] backup everything
   [_] encrypted locally if sent out
 [_] cookbook
-[_] ./dev wrapper
+[X] ./dev wrapper
 [_] Procfile
 [_] vagrant
 [_] initial apps

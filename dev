@@ -1,0 +1,10 @@
+#!/bin/sh
+
+root=$(readlink -f $(dirname $0))
+
+export EMAN_DATA_DIR=$root/tmp/data
+export EMAN_COOKBOOKDS_DIR=$root/cookbooks
+
+mkdir -p $EMAN_DATA_DIR
+
+exec "$@"
