@@ -1,4 +1,7 @@
 [_] groups eman-user, eman-admin
+  [_] create git data store with --shared
+  [_] postinst
+  [X] allow chef-solo as root to eman-admin
 [_] commands
   [_] eman site add SITE
   [_] eman app add SITE APP PATH
@@ -6,7 +9,7 @@
   [_] eman app remove SITE APP [PATH]
   [_] eman commit
   [_] eman apply
-    [_] sudo chef-solo # allowed via sudoers to eman-admin
+    :sudo chef-solo # allowed via sudoers to eman-admin
   [_] eman diff
   [_] eman log
   [_] eman self-setup # postinst
