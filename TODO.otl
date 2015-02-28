@@ -1,0 +1,35 @@
+[_] groups eman-user, eman-admin
+[_] commands
+  [_] eman site add SITE
+  [_] eman app add SITE APP PATH
+  [_] eman site remove SITE
+  [_] eman app remove SITE APP [PATH]
+  [_] eman commit
+  [_] eman apply
+    [_] sudo chef-solo # allowed via sudoers to eman-admin
+  [_] eman diff
+  [_] eman log
+  [_] eman self-setup # postinst
+[_] data store in git
+[_] nginx by default
+[_] security ratings
+  [_] * to *****
+[_] security guidelines
+  : run each app for each site as its own user; reverse prozy theough nginx
+[_] enforce ssl everywhere
+[_] auto dns setup
+  [_] register domain programatically
+[_] solve as much as possible of issues on the packages
+  [_] keep cookbooks as trivia as ossible
+[_] all.commands from webapp run as the users who issued them
+  [_] webapp users are system users
+[_] backup everything
+  [_] encrypted locally if sent out
+[_] cookbook
+[_] ./dev wrapper
+[_] Procfile
+[_] vagrant
+[_] initial apps
+  [_] redmine
+  [_] email server
+  [_] static website
