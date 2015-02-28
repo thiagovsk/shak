@@ -11,10 +11,7 @@ end
 
 desc 'Builds everything that needs to be built'
 task :default do
-  # hook into gem2deb
-  if Dir.exists?('debian')
-    ln_s '../Rakefile', 'debian/dh_ruby.rake'
-  end
+  puts "nothing to do"
 end
 
 desc 'Installs files into DESTDIR (or /)'
@@ -44,5 +41,4 @@ end
 desc 'cleans up the build'
 task :clean do
   rm_rf 'pkg'
-  rm_f 'debian/dh_ruby.rake'
 end

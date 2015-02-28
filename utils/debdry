@@ -1,0 +1,8 @@
+#!/bin/sh
+
+set -e
+
+dh-make-ruby --no-wnpp-check --package eman .
+cp changelog debian/changelog
+ln -sf ../Rakefile debian/dh_ruby.rake
+echo '3.0 (native)' > debian/source/format
