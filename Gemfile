@@ -1,4 +1,4 @@
 source 'https://rubygems.org'
 
-# Specify your gem's dependencies in eman.gemspec
+# Specify your gem's dependencies in shak.gemspec
 gemspec

@@ -1,22 +1,19 @@
-# Eman
+# SHAK - self hosting applications kit
 
-TODO: Write a gem description
+shak is a tool for managing the deployment of multiple applications to
+server, usually a personal one. It allows users without technical
+knowledge to maintain their own servers at home or in the cloud. shak is
+opininated and will setup applications based on distribution packages in
+the most secure way possible.
 
 ## Installation
 
-Add this line to your application's Gemfile:
+TODO: as a Debian package
+TODO: as an RPM package
 
-```ruby
-gem 'eman'
-```
+As Rubygem:
 
-And then execute:
-
-    $ bundle
-
-Or install it yourself as:
-
-    $ gem install eman
+    $ gem install shak
 
 ## Usage
 
@@ -24,8 +21,8 @@ TODO: Write usage instructions here
 
 ## Contributing
 
-1. Fork it ( https://github.com/[my-github-username]/eman/fork )
+1. Fork it ( https://gitlab.com/terceiro/shak )
 2. Create your feature branch (`git checkout -b my-new-feature`)
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
-5. Create a new Pull Request
+5. Create a new Merge Request

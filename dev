@@ -2,9 +2,8 @@
 
 root=$(readlink -f $(dirname $0))
 
-export EMAN_DATA_DIR=$root/tmp/data
-export EMAN_COOKBOOKDS_DIR=$root/cookbooks
+export SHAK_DATA_DIR=$root/tmp/data
 
-mkdir -p $EMAN_DATA_DIR
+mkdir -p $SHAK_DATA_DIR
 
 exec "$@"

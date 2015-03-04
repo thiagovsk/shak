@@ -1,0 +1,1 @@
+%shak-admin	ALL = NOPASSWD: /usr/bin/chef-solo

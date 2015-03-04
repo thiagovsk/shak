@@ -1,24 +1,24 @@
 # coding: utf-8
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'eman/version'
+require 'shak/version'
 
 description = <<EOF
-eman is a tool for managing the deployment of multiple applications to
+shak is a tool for managing the deployment of multiple applications to
 server, usually a personal one. It allows users without technical
-knowledge to maintain their own servers at home or in the cloud. eman is
+knowledge to maintain their own servers at home or in the cloud. shak is
 opininated and will setup applications based on distribution packages in
 the most secure way possible.
 EOF
 
 Gem::Specification.new do |spec|
-  spec.name          = "eman"
-  spec.version       = Eman::VERSION
+  spec.name          = "shak"
+  spec.version       = Shak::VERSION
   spec.authors       = ["Antonio Terceiro"]
   spec.email         = ["terceiro@softwarelivre.org"]
-  spec.summary       = %q{Easy server manager}
-  spec.description   = description 
-  spec.homepage      = "https://gitlab.com/terceiro/eman"
+  spec.summary       = %q{tool for installing and configuring server applications}
+  spec.description   = description
+  spec.homepage      = "https://gitlab.com/terceiro/shak"
   spec.license       = "AGPL"
 
   spec.files         = Dir.glob('**/*')

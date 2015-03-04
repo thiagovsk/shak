@@ -4,14 +4,14 @@
     [_] site
     [_] app
     [_] cookbook
-  [_] groups eman-user, eman-admin
+  [_] groups shak-user, shak-admin
     [_] create git data store with --shared
     [_] postinst
-    [X] allow chef-solo as root to eman-admin
+    [X] allow chef-solo as root to shak-admin
   [_] commands
-    [_] eman apply
-      :sudo chef-solo # allowed via sudoers to eman-admin
-    [_] eman self-setup # postinst
+    [_] shak apply
+      :sudo chef-solo # allowed via sudoers to shak-admin
+    [_] shak self-setup # postinst
       [_] needs to run as root
       [_] create groups
       [_] create/init data dir
@@ -29,13 +29,13 @@
     [_] add app
 [_] Later
   [_] commands
-    [_] eman site add SITE
-    [_] eman app add SITE APP PATH
-    [_] eman site remove SITE
-    [_] eman app remove SITE APP [PATH]
-    [_] eman commit
-    [_] eman diff
-    [_] eman log
+    [_] shak site add SITE
+    [_] shak app add SITE APP PATH
+    [_] shak site remove SITE
+    [_] shak app remove SITE APP [PATH]
+    [_] shak commit
+    [_] shak diff
+    [_] shak log
   [_] security ratings
     [_] * to *****
   [_] security guidelines
