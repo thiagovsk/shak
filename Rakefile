@@ -11,7 +11,7 @@ end
 
 desc 'Builds everything that needs to be built'
 task :default do
-  puts "nothing to do"
+  sh 'rspec', '--color'
 end
 
 desc 'Installs files into DESTDIR (or /)'
