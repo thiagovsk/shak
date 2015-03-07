@@ -1,5 +1,6 @@
-require "shak/version"
-
 module Shak
-  # Your code goes here...
+  # Just declaring the namespace here
 end
+
+require "shak/version"
+require 'shak/config'
