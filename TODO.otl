@@ -4,11 +4,15 @@
     [_] site
     [_] app
     [_] cookbook
+    [_] repository
   [_] groups shak-user, shak-admin
     [_] create git data store with --shared
     [_] postinst
     [X] allow chef-solo as root to shak-admin
   [_] commands
+    [_] choose cmdline app library
+      : http://www.rubydoc.info/gems/commander/4.3.0
+      : http://cmdparse.gettalong.org/tutorial.html
     [_] shak apply
       :sudo chef-solo # allowed via sudoers to shak-admin
     [_] shak self-setup # postinst
