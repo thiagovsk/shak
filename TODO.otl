@@ -1,14 +1,9 @@
 [_] MVP
-  [_] data store in git
   [_] backend classes
-    [_] site
-    [_] app
+    [X] site
+    [X] app
     [_] cookbook
-    [_] repository
-  [_] groups shak-user, shak-admin
-    [_] create git data store with --shared
-    [_] postinst
-    [X] allow chef-solo as root to shak-admin
+    [X] repository
   [_] commands
     [_] choose cmdline app library
       : http://www.rubydoc.info/gems/commander/4.3.0
@@ -32,6 +27,11 @@
     [_] add site
     [_] add app
 [_] Later
+  [_] data store in git
+  [_] groups shak-user, shak-admin
+    [_] create git data store with --shared
+    [_] postinst
+    [X] allow chef-solo as root to shak-admin
   [_] commands
     [_] shak site add SITE
     [_] shak app add SITE APP PATH

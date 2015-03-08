@@ -1,3 +1,7 @@
+require 'forwardable'
+
+require 'shak/set_with_memory'
+
 module Shak
 
   class Site
@@ -7,6 +11,8 @@ module Shak
     attr_accessor :ssl
     attr_accessor :www
 
+    alias :id :hostname
+
     def initialize(attributes=nil)
       attributes.each do |k,v|
         self.send("#{k}=", v)
@@ -14,7 +20,7 @@ module Shak
     end
 
     def applications
-      @applications ||= []
+      @applications ||= Shak::SetWithMemory.new
     end
 
   end
