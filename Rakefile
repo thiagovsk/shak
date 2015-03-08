@@ -16,18 +16,15 @@ end
 
 desc 'Installs files into DESTDIR (or /)'
 task :install do
-  if Dir.exists?('debian')
-    prefix = '/usr'
-  else
-    prefix = '/usr/local'
-  end
-  destdir = ENV['DESTDIR']
+  destdir = ENV.fetch('DESTDIR', '/')
 
-  Dir.glob('{cookbooks}/**/*').each do |f|
-    next if File.directory?(f)
-    dir = File.join(destdir, prefix, 'share', File.dirname(f))
-    mkdir_p dir
-    install f, dir, :mode => 0644
+  if File.directory?('debian')
+    Dir.glob('{cookbooks}/**/*').each do |f|
+      next if File.directory?(f)
+      dir = File.join(destdir, '/usr/lib/ruby/vendor_ruby/shak', File.dirname(f))
+      mkdir_p dir
+      install f, dir, :mode => 0644
+    end
   end
 
   Dir.glob('etc/**/*').each do |f|
@@ -38,7 +35,9 @@ task :install do
   end
 end
 
-desc 'cleans up the build'
-task :clean do
-  rm_rf 'pkg'
+desc 'Builds Debian package'
+task :deb do
+  mkdir_p 'pkg'
+  ENV['PATH'] = [File.expand_path('utils'), ENV['PATH']].join(':')
+  sh 'git', 'debdry-build', '--git-export-dir=pkg'
 end
