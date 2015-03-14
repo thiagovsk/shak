@@ -1,7 +1,5 @@
 require 'spec_helper'
 
-require 'json'
-
 require 'shak/repository'
 require 'shak/context/apply_configuration'
 

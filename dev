@@ -2,6 +2,8 @@
 
 root=$(readlink -f $(dirname $0))
 
+export RUBYLIB=${root}/lib
+export PATH=${root}/bin:${PATH}
 export SHAK_DATA_DIR=$root/tmp/data
 
 mkdir -p $SHAK_DATA_DIR
