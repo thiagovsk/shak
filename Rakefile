@@ -9,8 +9,10 @@
   end
 end
 
-desc 'Builds everything that needs to be built'
-task :default do
+task :default # not yet
+
+desc 'Runs unit tests with Rspec)'
+task :spec do
   sh 'rspec', '--color'
 end
 
