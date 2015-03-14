@@ -15,6 +15,10 @@ module Shak
       @sites ||= Shak::SetWithMemory.new
     end
 
+    def ==(other)
+      self.sites == other.sites
+    end
+
   end
 
 end

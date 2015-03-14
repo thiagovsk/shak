@@ -23,6 +23,12 @@ module Shak
       @applications ||= Shak::SetWithMemory.new
     end
 
+    def ==(other)
+      [:hostname, :name, :ssl, :www, :applications].all? do |attr|
+        self.send(attr) == other.send(attr)
+      end
+    end
+
   end
 
 end

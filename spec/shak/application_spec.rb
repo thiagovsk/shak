@@ -26,4 +26,30 @@ describe Shak::Application do
     end
   end
 
+  context 'comparing for equality' do
+
+    let(:app1) do
+      app1 = Shak::Application.new(
+        name: 'My app',
+        cookbook_name: 'myapp',
+        path: '/myapp'
+      )
+    end
+    let(:app2) { app1.dup }
+
+    it 'is equal if attributes are equal' do
+      expect(app2).to eq(app1)
+    end
+
+    it 'is not equal if attributes changes' do
+      app2.name = 'blablabla'
+      expect(app2).to_not eq(app1)
+    end
+
+    it 'is not equal if cookbook data changes' do
+      app2.cookbook_data = { 'foo' => 'bar' }
+      expect(app2).to_not eq(app1)
+    end
+  end
+
 end

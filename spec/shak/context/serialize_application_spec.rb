@@ -15,8 +15,8 @@ describe Shak::Context::SerializeApplication do
     )
     io = StringIO.new
 
-    serializer = Shak::Context::SerializeApplication.new(app)
-    serializer.serialize(io)
+    serializer = Shak::Context::SerializeApplication.new
+    serializer.serialize(app, io)
 
     data = YAML.load(io.string)
 

@@ -13,9 +13,9 @@ describe Shak::Context::SerializeSite do
       ssl: true,
       www: 'force',
     )
-    serializer = Shak::Context::SerializeSite.new(site)
+    serializer = Shak::Context::SerializeSite.new
     io = StringIO.new
-    serializer.serialize(io)
+    serializer.serialize(site, io)
 
     data = YAML.load(io.string)
     expect(data['hostname']).to eq('foo.com')

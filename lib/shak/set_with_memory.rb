@@ -5,7 +5,7 @@ module Shak
     delegate :each => :all
 
     def add(item)
-      raise ValueError("An ID is mandatory!") unless item.id
+      raise ArgumentError.new("An ID is mandatory!") unless item.id
       backend[item.id] = item
     end
 
@@ -28,6 +28,10 @@ module Shak
 
     def removed
       @removed ||= []
+    end
+
+    def ==(other)
+      backend == other.send(:backend)
     end
 
     private

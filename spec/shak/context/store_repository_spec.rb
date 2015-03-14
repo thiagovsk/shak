@@ -67,4 +67,10 @@ describe Shak::Context::StoreRepository do
     expect(repository_files).to_not include('foo.com/_app2.yaml')
   end
 
+  it 'reads from disk' do
+    store.write(repository)
+    from_disk = store.read
+    expect(from_disk).to eq(repository)
+  end
+
 end

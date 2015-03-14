@@ -24,8 +24,29 @@ module Shak
         end
       end
 
-      # Reads a repository to disk. Returns an instance of Shak::Repository
+      # Reads a repository from disk. Returns an instance of Shak::Repository
       def read
+        repository = Shak::Repository.new
+        site_reader = Shak::Context::SerializeSite.new
+        app_reader = Shak::Context::SerializeApplication.new
+
+        Dir.chdir(Shak.config.data_dir) do
+          Dir.glob('*.yaml').each do |data|
+            site = File.open(data) do |f|
+              site_reader.read(f)
+            end
+
+            Dir.glob("#{site.hostname}/*.yaml") do |app_file|
+              app = File.open(app_file) do |f|
+                app_reader.read(f)
+              end
+              site.applications.add(app)
+            end
+
+            repository.sites.add(site)
+          end
+        end
+        repository
       end
 
       private
@@ -48,7 +69,7 @@ module Shak
 
       def write_site(site)
         File.open(site_conf(site), 'w') do |f|
-          Shak::Context::SerializeSite.new(site).serialize(f)
+          Shak::Context::SerializeSite.new.serialize(site, f)
         end
       end
 
@@ -57,7 +78,7 @@ module Shak
         FileUtils.mkdir_p(dir)
         app_file = app_conf(site, app)
         File.open(app_file, 'w') do |f|
-          Shak::Context::SerializeApplication.new(app).serialize(f)
+          Shak::Context::SerializeApplication.new.serialize(app, f)
         end
       end
 
