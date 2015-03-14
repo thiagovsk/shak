@@ -34,4 +34,23 @@ describe Shak::Site do
 
   end
 
+  context 'producing a run list' do
+    def app(c)
+      Shak::Application.new.tap do |a|
+        a.cookbook = Shak::Cookbook.send(:new, c)
+        a.path = "/" + c
+      end
+    end
+    let(:site) do
+      Shak::Site.new
+    end
+
+    it 'lists cookbooks from each app' do
+      site.applications.add(app('app1'))
+      site.applications.add(app('app2'))
+
+      expect(site.run_list).to eq(['recipe[app1]', 'recipe[app2]'])
+    end
+  end
+
 end

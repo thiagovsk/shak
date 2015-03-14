@@ -15,6 +15,10 @@ module Shak
       @sites ||= Shak::SetWithMemory.new
     end
 
+    def run_list
+      (['recipe[shak]'] + sites.all.map { |s| s.run_list }).flatten
+    end
+
     def ==(other)
       self.sites == other.sites
     end

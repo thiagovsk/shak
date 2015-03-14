@@ -8,6 +8,7 @@ describe Shak::Repository do
   let(:repository) { Shak::Repository.new }
 
   let(:site) { Shak::Site.new(hostname: 'foo.com') }
+  let(:other_site) { Shak::Site.new(hostname: 'bar.com') }
 
   it 'adds a new site' do
     repository.sites.add(site)
@@ -45,6 +46,16 @@ describe Shak::Repository do
 
     stored = repository.sites.find(site.hostname)
     expect(stored).to be(other_site)
+  end
+
+  context 'producing a run list' do
+    it 'joins shak with each site run_lists' do
+      repository.sites.add(site)
+      repository.sites.add(other_site)
+      allow(site).to receive(:run_list).and_return(['recipe[app1]'])
+      allow(other_site).to receive(:run_list).and_return(['recipe[app2]'])
+      expect(repository.run_list).to eq(['recipe[shak]', 'recipe[app1]', 'recipe[app2]'])
+    end
   end
 
 end

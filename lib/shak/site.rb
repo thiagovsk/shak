@@ -23,6 +23,12 @@ module Shak
       @applications ||= Shak::SetWithMemory.new
     end
 
+    def run_list
+      applications.all.map do |app|
+        "recipe[#{app.cookbook_name}]"
+      end
+    end
+
     def ==(other)
       [:hostname, :name, :ssl, :www, :applications].all? do |attr|
         self.send(attr) == other.send(attr)
