@@ -1,8 +1,7 @@
 require 'yaml'
 
 module Shak
-  module Context
-    class SerializeSite
+    class SiteSerializer
 
       def serialize(site, stream)
         data = {
@@ -24,5 +23,4 @@ module Shak
       end
 
     end
-  end
 end

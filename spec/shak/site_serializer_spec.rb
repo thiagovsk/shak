@@ -1,10 +1,10 @@
 require "spec_helper"
 
-require 'shak/context/serialize_site'
+require 'shak/site_serializer'
 require 'shak/site'
 require 'stringio'
 
-describe Shak::Context::SerializeSite do
+describe Shak::SiteSerializer do
 
   it 'writes in YAML format' do
     site = Shak::Site.new(
@@ -13,7 +13,7 @@ describe Shak::Context::SerializeSite do
       ssl: true,
       www: 'force',
     )
-    serializer = Shak::Context::SerializeSite.new
+    serializer = Shak::SiteSerializer.new
     io = StringIO.new
     serializer.serialize(site, io)
 

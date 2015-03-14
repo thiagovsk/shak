@@ -2,14 +2,14 @@ require "spec_helper"
 
 require 'securerandom'
 
-require 'shak/context/store_repository'
+require 'shak/repository_disk_store'
 require 'shak/repository'
 require 'shak/site'
 require 'shak/application'
 
-describe Shak::Context::StoreRepository do
+describe Shak::RepositoryDiskStore do
 
-  let(:store) { Shak::Context::StoreRepository.new }
+  let(:store) { Shak::RepositoryDiskStore.new }
 
   def new_application(path)
     Shak::Application.new(

@@ -4,9 +4,9 @@ require 'stringio'
 require 'yaml'
 
 require 'shak/application'
-require 'shak/context/serialize_application'
+require 'shak/application_serializer'
 
-describe Shak::Context::SerializeApplication do
+describe Shak::ApplicationSerializer do
 
   it 'writes in YAML format' do
     app = Shak::Application.new(
@@ -15,7 +15,7 @@ describe Shak::Context::SerializeApplication do
     )
     io = StringIO.new
 
-    serializer = Shak::Context::SerializeApplication.new
+    serializer = Shak::ApplicationSerializer.new
     serializer.serialize(app, io)
 
     data = YAML.load(io.string)
