@@ -41,3 +41,8 @@ task :deb do
   ENV['PATH'] = [File.expand_path('utils'), ENV['PATH']].join(':')
   sh 'git', 'debdry-build', '--git-export-dir=pkg'
 end
+
+desc 'Edits changelog'
+task :changelog do
+  sh 'dch', '--changelog', 'changelog'
+end
