@@ -22,6 +22,10 @@ module Shak
       "#<Cookbook:#{name}>"
     end
 
+    def to_s
+      name
+    end
+
     private
 
     def initialize(name)

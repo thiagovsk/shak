@@ -46,3 +46,10 @@ desc 'Edits changelog'
 task :changelog do
   sh 'dch', '--changelog', 'changelog'
 end
+
+desc 'Adds a new cookbook'
+task :cookbook do
+  print "Cookbook name: "
+  cookbook = $stdin.gets.strip
+  sh 'knife', 'cookbook', 'create', cookbook, '-o', 'cookbooks/'
+end
