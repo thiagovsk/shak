@@ -1,3 +1,5 @@
+require 'shak/cookbook'
+
 module Shak
 
   class Application
@@ -15,6 +17,15 @@ module Shak
       end if data
       @path ||= '/'
       @cookbook_data ||= {}
+    end
+
+    def cookbook
+      @cookbook ||= Shak::Cookbook[cookbook_name]
+    end
+
+    def cookbook=(cookbook)
+      @cookbook_name = cookbook.name
+      @cookbook = cookbook
     end
 
     def id

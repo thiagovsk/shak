@@ -13,4 +13,15 @@ describe Shak::Cookbook do
     expect(cookbooks.map(&:name).sort.reverse).to eq(['foo', 'bar'])
   end
 
+  context 'returning cookbook by name' do
+    it 'works if cookbook exists' do
+      expect(Shak::Cookbook['shak']).to be_a(Shak::Cookbook)
+    end
+    it 'fails if cookbook does not exist' do
+      name = 'incrediblyunlikelycookbookname'
+      expect(lambda { Shak::Cookbook[name] }).to raise_error(ArgumentError)
+    end
+  end
+
+
 end

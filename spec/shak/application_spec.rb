@@ -52,4 +52,19 @@ describe Shak::Application do
     end
   end
 
+  context 'referencing cookbook' do
+    let(:app) { Shak::Application.new(cookbook_name: 'shak') }
+    let(:cookbook) { Shak::Cookbook.send(:new, 'foo') }
+
+    it 'returns an Shak::Cookbook instance' do
+      expect(app.cookbook).to be_a(Shak::Cookbook)
+    end
+
+    it 'sets a coobook' do
+      app.cookbook = cookbook
+      expect(app.cookbook).to be(cookbook)
+      expect(app.cookbook_name).to eq(cookbook.name)
+    end
+  end
+
 end

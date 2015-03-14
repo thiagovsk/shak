@@ -8,12 +8,23 @@ module Shak
 
     class << self
 
+      def path
+        Shak.config.cookbooks_dir
+      end
+
       def all
-        Dir.chdir(Shak.config.cookbooks_dir) do
+        Dir.chdir(path) do
           Dir.glob('*').map do |c|
             new(c)
           end
         end
+      end
+
+      def [](cookbook_name)
+        if !File.directory?(File.join(path, cookbook_name))
+          raise ArgumentError.new("No cookbook named \"%s\"" % cookbook_name)
+        end
+        new(cookbook_name)
       end
 
     end
