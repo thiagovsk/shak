@@ -5,10 +5,10 @@
     [_] cookbook
     [X] repository
   [_] commands
-    [_] choose cmdline app library
-      : http://www.rubydoc.info/gems/commander/4.3.0
+    [X] choose cmdline app library
+      : ***** http://www.rubydoc.info/gems/commander/4.3.0
       : http://cmdparse.gettalong.org/tutorial.html
-    [_] shak apply
+    [X] shak apply
       :sudo chef-solo # allowed via sudoers to shak-admin
     [_] shak self-setup # postinst
       [_] needs to run as root
