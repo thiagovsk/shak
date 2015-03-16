@@ -8,7 +8,13 @@
 Vagrant.configure(2) do |config|
   config.vm.box = "debian-jessie"
   config.vm.network "forwarded_port", guest: 3000, host: 3000
+  config.vm.network "forwarded_port", guest: 80, host: 8080
   config.vm.provision :shell do |shell|
-    shell.inline = 'su vagrant -c /vagrant/utils/bootstrap'
+    shell.privileged = false
+    shell.path = 'utils/bootstrap'
+    shell.args = ['DEBFULLNAME', 'DEBEMAIL'].map do |var|
+      ENV[var] && "#{var}='#{ENV[var]}'" || nil
+    end.compact
+    shell.keep_color = true
   end
 end
