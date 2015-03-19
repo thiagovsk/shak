@@ -55,3 +55,7 @@
     [_] encrypted locally if sent out
   [X] cookbook
   [X] ./dev wrapper
+  [_] desktop client
+    connects to server via SSH
+    installs shak if needed
+    browses to shak web UI via SSH tunnel
