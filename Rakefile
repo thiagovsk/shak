@@ -9,7 +9,7 @@
   end
 end
 
-task :default # not yet
+task :default => :spec
 
 desc 'Runs unit tests with Rspec)'
 task :spec do
