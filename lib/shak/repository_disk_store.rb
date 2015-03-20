@@ -28,6 +28,10 @@ module Shak
     # Reads a repository from disk. Returns an instance of Shak::Repository
     def read
       repository = Shak::Repository.new
+      if !Dir.exist?(Shak.config.data_dir)
+        return repository
+      end
+
       site_reader = Shak::SiteSerializer.new
       app_reader = Shak::ApplicationSerializer.new
 
