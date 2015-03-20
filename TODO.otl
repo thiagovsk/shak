@@ -10,6 +10,8 @@
       : http://cmdparse.gettalong.org/tutorial.html
     [X] shak apply
       :sudo chef-solo # allowed via sudoers to shak-admin
+    [_] shak site add SITE
+    [_] shak app add SITE APP PATH
     [_] shak self-setup # postinst
       [_] needs to run as root
       [_] create groups
@@ -33,11 +35,8 @@
     [_] postinst
     [X] allow chef-solo as root to shak-admin
   [_] commands
-    [_] shak site add SITE
-    [_] shak app add SITE APP PATH
     [_] shak site remove SITE
     [_] shak app remove SITE APP [PATH]
-    [_] shak commit
     [_] shak diff
     [_] shak log
   [_] security ratings
