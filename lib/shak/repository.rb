@@ -8,8 +8,7 @@ module Shak
   class Repository
 
     extend Forwardable
-    delegate :each => :sites
-    include Enumerable
+    delegate [:each, :find] => :sites
 
     def sites
       @sites ||= Shak::SetWithMemory.new
