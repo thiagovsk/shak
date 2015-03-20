@@ -1,6 +1,7 @@
 require 'fileutils'
 
 require 'shak'
+require 'shak/repository'
 require 'shak/site_serializer'
 require 'shak/application_serializer'
 
@@ -9,6 +10,7 @@ module Shak
 
     # Writes +repository+ to disk.
     def write(repository)
+      FileUtils.mkdir_p(Shak.config.data_dir)
       repository.sites.each do |site|
         write_site(site)
         site.applications.each do |app|
