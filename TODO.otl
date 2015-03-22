@@ -1,8 +1,8 @@
 [_] MVP
-  [_] backend classes
+  [X] backend classes
     [X] site
     [X] app
-    [_] cookbook
+    [X] cookbook
     [X] repository
   [_] commands
     [X] choose cmdline app library
@@ -10,9 +10,10 @@
       : http://cmdparse.gettalong.org/tutorial.html
     [X] shak apply
       :sudo chef-solo # allowed via sudoers to shak-admin
-    [_] shak site add SITE
-    [_] shak app add SITE APP PATH
-    [_] shak self-setup # postinst
+    [X] shak add-site SITE
+    [_] shak add-app SITE APP PATH
+    [_] shak self-setup # postinst (?)
+      : this should probaby be in a proper chef recipe
       [_] needs to run as root
       [_] create groups
       [_] create/init data dir
@@ -28,6 +29,9 @@
     [_] basic setup (?)
     [_] add site
     [_] add app
+  [_] daemon
+    : listens for changes to the store and calls the equivalent of `shak
+    : apply`
 [_] Later
   [_] data store in git
   [_] groups shak-user, shak-admin
