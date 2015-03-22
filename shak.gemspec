@@ -30,4 +30,5 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "rake"
 
   spec.add_runtime_dependency 'commander'
+  spec.add_runtime_dependency 'text-table'
 end
