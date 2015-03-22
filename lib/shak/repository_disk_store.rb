@@ -69,7 +69,7 @@ module Shak
     end
 
     def app_conf(site, app)
-      File.join(site_dir(site), app.id + '.yaml')
+      File.join(site_dir(site), app.filename_id + '.yaml')
     end
 
     def write_site(site)

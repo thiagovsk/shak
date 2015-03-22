@@ -28,7 +28,9 @@ module Shak
       @cookbook = cookbook
     end
 
-    def id
+    alias :id :path
+
+    def filename_id
       path.gsub('/', '_')
     end
 

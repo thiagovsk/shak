@@ -12,18 +12,9 @@ describe Shak::Application do
     expect(app.site).to be(site)
   end
 
-  context 'uses path as identifier' do
-    let(:app) { Shak::Application.new }
-
-    it 'turns / into _' do
-      app.path = '/'
-      expect(app.id).to eq('_')
-    end
-
-    it 'turns /foo into _foo' do
-      app.path = '/foo'
-      expect(app.id).to eq('_foo')
-    end
+  it 'uses path as id' do
+    app = Shak::Application.new(path: '/foobar')
+    expect(app.id).to eq('/foobar')
   end
 
   context 'comparing for equality' do
