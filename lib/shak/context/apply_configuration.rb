@@ -2,15 +2,18 @@ require 'tempfile'
 require 'json'
 
 require 'shak'
+require 'shak/repository_disk_store'
 
 module Shak
   module Context
     class ApplyConfiguration
 
-      attr_reader :repository
+      def store
+        @store ||= Shak::RepositoryDiskStore.new
+      end
 
-      def initialize(repository)
-        @repository = repository
+      def repository
+        @repository ||= store.read
       end
 
       def apply!

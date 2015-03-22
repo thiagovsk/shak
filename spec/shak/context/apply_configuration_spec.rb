@@ -5,8 +5,8 @@ require 'shak/context/apply_configuration'
 
 describe Shak::Context::ApplyConfiguration do
 
-  let(:repository) { Shak::Repository.new }
-  let(:apply) { Shak::Context::ApplyConfiguration.new(repository) }
+  let(:apply) { Shak::Context::ApplyConfiguration.new }
+  let(:repository) { apply.repository }
 
   it 'references repository' do
     expect(apply.repository).to be(repository)
