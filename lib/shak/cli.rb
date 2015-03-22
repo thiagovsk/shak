@@ -25,6 +25,10 @@ module Shak
       exit rc
     end
 
+    def fail_usage(command)
+      fail 'usage: ' + command.syntax
+    end
+
     def parse_extra_data(args)
       args.inject({}) do |acc,arg|
         key, value = arg.split('=')

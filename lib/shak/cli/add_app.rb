@@ -9,7 +9,7 @@ command :'add-app' do |c|
     path = args.shift
 
     if [hostname, appname, path].any?(&:nil?)
-      fail('usage: ' + c.syntax)
+      fail_usage c
     end
 
     extra_data = parse_extra_data(args)

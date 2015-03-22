@@ -6,7 +6,7 @@ command :'add-site' do |c|
   c.description = 'Adds a new site to the system'
   c.action do |args,options|
     if args.empty?
-      fail 'usage: ' + c.syntax
+      fail_usage c
     end
 
     hostname = args.shift
