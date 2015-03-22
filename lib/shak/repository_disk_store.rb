@@ -45,6 +45,7 @@ module Shak
             app = File.open(app_file) do |f|
               app_reader.read(f)
             end
+            app.site = site
             site.applications.add(app)
           end
 

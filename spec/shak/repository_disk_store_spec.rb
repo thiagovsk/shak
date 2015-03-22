@@ -67,10 +67,22 @@ describe Shak::RepositoryDiskStore do
     expect(repository_files).to_not include('foo.com/_app2.yaml')
   end
 
-  it 'reads from disk' do
-    store.write(repository)
-    from_disk = store.read
-    expect(from_disk).to eq(repository)
+  context 'reading from disk' do
+    before(:each) do
+      store.write(repository)
+      @from_disk = store.read
+    end
+
+    it 'reads correctly' do
+      expect(@from_disk).to eq(repository)
+    end
+
+    it 'assigns site in applications' do
+      site = @from_disk.sites.find('foo.com')
+      app = site.find('/app1')
+      expect(app.site).to eq(site)
+    end
+
   end
 
 end
