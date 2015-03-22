@@ -1,6 +1,6 @@
 require 'text-table'
 
-require 'shak/repository_disk_store'
+require 'shak/context/traverse'
 
 command :show do |c|
   c.syntax = 'shak show [OPTIONS]'
@@ -8,15 +8,12 @@ command :show do |c|
   c.action do |args, options|
     fail_usage(c) if args.size > 0
 
-    store = RepositoryDiskStore.new
-    repository = store.read
+    traversal = Shak::Context::Traverse.new
 
     table = Text::Table.new
     table.head = ['Site', 'Application', 'Path']
-    repository.each do |site|
-      site.each do |app|
-        table.rows << [site.hostname, app.cookbook_name, app.path]
-      end
+    traversal.each_app do |app|
+      table.rows << [app.site.hostname, app.cookbook_name, app.path]
     end
     puts table
   end
