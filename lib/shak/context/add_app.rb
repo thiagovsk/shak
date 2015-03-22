@@ -1,9 +1,9 @@
-require 'shak/repository_disk_store'
 require 'shak/application'
+require 'shak/context/base'
 
 module Shak
   module Context
-    class AddApp
+    class AddApp < Base
 
       class SiteDoesNotExist < Exception
         def initialize(hostname)
@@ -14,14 +14,6 @@ module Shak
         def initialize(path)
           super("Path %s is already in use by another application" % path)
         end
-      end
-
-      def store
-        @store ||= Shak::RepositoryDiskStore.new
-      end
-
-      def repository
-        @repository ||= store.read
       end
 
       def add!(hostname, appname, path, extra_data = {})

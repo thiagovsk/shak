@@ -1,20 +1,12 @@
 require 'tempfile'
 require 'json'
 
-require 'shak'
-require 'shak/repository_disk_store'
+
+require 'shak/context/base'
 
 module Shak
   module Context
-    class ApplyConfiguration
-
-      def store
-        @store ||= Shak::RepositoryDiskStore.new
-      end
-
-      def repository
-        @repository ||= store.read
-      end
+    class ApplyConfiguration < Base
 
       def apply!
         solo_config = generate_solo_configuration

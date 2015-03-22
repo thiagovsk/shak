@@ -1,24 +1,14 @@
+require 'shak/context/base'
 require 'shak/site'
-require 'shak/repository_disk_store'
 
 module Shak
   module Context
-    class AddSite
+    class AddSite < Base
 
       class SiteAlreadyExists < Exception
         def initialize(hostname)
           super("Site %s already exists" % hostname)
         end
-      end
-
-      attr_reader :store
-
-      def initialize
-        @store = Shak::RepositoryDiskStore.new
-      end
-
-      def repository
-        @repository ||= store.read
       end
 
       def add!(hostname, options = {})
