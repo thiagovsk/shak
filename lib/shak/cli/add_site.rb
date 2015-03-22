@@ -1,4 +1,3 @@
-require 'shak/repository'
 require 'shak/context/add_site'
 
 command :'add-site' do |c|
