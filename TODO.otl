@@ -11,7 +11,7 @@
     [X] shak apply
       :sudo chef-solo # allowed via sudoers to shak-admin
     [X] shak add-site SITE
-    [_] shak add-app SITE APP PATH
+    [X] shak add-app SITE APP PATH
     [_] shak self-setup # postinst (?)
       : this should probaby be in a proper chef recipe
       [_] needs to run as root
