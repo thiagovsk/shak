@@ -25,6 +25,14 @@ module Shak
       exit rc
     end
 
+    def parse_extra_data(args)
+      args.inject({}) do |acc,arg|
+        key, value = arg.split('=')
+        acc[key] = value
+        acc
+      end
+    end
+
   end
 
 end

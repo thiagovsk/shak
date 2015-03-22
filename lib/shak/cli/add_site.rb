@@ -10,12 +10,7 @@ command :'add-site' do |c|
     end
 
     hostname = args.shift
-
-    data = args.inject({}) do |acc,arg|
-      key, value = arg.split('=')
-      acc[key] = value
-      acc
-    end
+    data = parse_extra_data(args)
 
     add_site = Shak::Context::AddSite.new
 
