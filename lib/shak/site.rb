@@ -13,6 +13,9 @@ module Shak
 
     alias :id :hostname
 
+    extend Forwardable
+    delegate [:each, :find] => :applications
+
     def initialize(attributes=nil)
       attributes.each do |k,v|
         self.send("#{k}=", v)
