@@ -18,6 +18,8 @@ module Shak
       end
 
       run!
+
+      finish_pager
     end
 
     def fail(message, rc=1)
@@ -35,6 +37,20 @@ module Shak
         acc[key] = value
         acc
       end
+    end
+
+    def pager
+      @pager ||= IO.popen(pager_environment, ['pager'], 'w')
+    end
+
+    def pager_environment
+      {
+        'LESS' => '-FRSX', # special handling for less(1)
+      }
+    end
+
+    def finish_pager
+      @pager.close if @pager
     end
 
   end

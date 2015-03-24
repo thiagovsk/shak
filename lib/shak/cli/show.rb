@@ -15,6 +15,7 @@ command :show do |c|
     traversal.each_app do |app|
       table.rows << [app.site.hostname, app.cookbook_name, app.path]
     end
-    puts table
+
+    pager.puts table
   end
 end
