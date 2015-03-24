@@ -4,11 +4,11 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'shak/version'
 
 description = <<EOF
-shak is a tool for managing the deployment of multiple applications to
+shak is a tool for managing the deployment of multiple applications to a
 server, usually a personal one. It allows users without technical
 knowledge to maintain their own servers at home or in the cloud. shak is
-opininated and will setup applications based on distribution packages in
-the most secure way possible.
+opininated; it will setup applications based on distribution packages,
+and in the most secure way possible.
 EOF
 
 Gem::Specification.new do |spec|
