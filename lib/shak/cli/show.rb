@@ -16,6 +16,8 @@ command :show do |c|
       table.rows << [app.site.hostname, app.cookbook_name, app.path]
     end
 
-    pager.puts table
+    if table.rows.size > 0
+      pager.puts table
+    end
   end
 end
