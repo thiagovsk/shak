@@ -1,6 +1,7 @@
 require 'spec_helper'
 
 require 'shak/repository'
+require 'shak/site'
 require 'shak/context/apply_configuration'
 
 describe Shak::Context::ApplyConfiguration do
@@ -12,12 +13,24 @@ describe Shak::Context::ApplyConfiguration do
     expect(apply.repository).to be(repository)
   end
 
-  it 'creates node attributes file' do
-    expect(repository).to receive(:run_list).and_return(['recipe[shak]'])
-    config_file = apply.send(:generate_json_attributes_file)
-    data = JSON.load(File.read(config_file))
+  context 'creating node attributes file' do
+    before(:each) do
+      allow(repository).to receive(:run_list).and_return(['recipe[shak]'])
+      repository.sites.add Shak::Site.new(hostname: 'foo.com')
+    end
 
-    expect(data).to eq({"run_list" => ["recipe[shak]"]})
+    let(:config_file) { apply.send(:generate_json_attributes_file) }
+    let(:data) { JSON.load(File.read(config_file)) }
+
+    it 'adds shak recipe to run_list' do
+      expect(data['run_list']).to include("recipe[shak]")
+    end
+
+    it 'adds hostname of sites' do
+      hostnames = data['sites'].map { |s| s['hostname'] }
+      expect(hostnames).to include('foo.com')
+    end
+
   end
 
   it 'creates solo config file' do

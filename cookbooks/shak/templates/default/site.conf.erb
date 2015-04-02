@@ -1,0 +1,10 @@
+server {
+  server_name <%= @hostname %>
+
+  access_log            /var/log/nginx/<%= @hostname %>.access.log;
+  error_log             /var/log/nginx/<%= @hostname %>.error.log;
+
+  include /etc/nginx/conf.d/<%= @hostname %>/*.conf;
+}
+
+# vim: ft=nginx
