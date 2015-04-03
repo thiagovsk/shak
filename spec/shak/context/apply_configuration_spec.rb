@@ -17,7 +17,11 @@ describe Shak::Context::ApplyConfiguration do
   context 'creating node attributes file' do
     before(:each) do
       allow(repository).to receive(:run_list).and_return(['recipe[shak]'])
-      repository.sites.add Shak::Site.new(hostname: 'foo.com')
+
+      site = Shak::Site.new(hostname: 'foo.com')
+      app = Shak::Application.new(cookbook_name: 'static_site')
+      site.applications.add app
+      repository.sites.add site
     end
 
     let(:config_file) { apply.send(:generate_json_attributes_file) }
@@ -30,6 +34,27 @@ describe Shak::Context::ApplyConfiguration do
     it 'adds hostname of sites' do
       hostnames = data['sites'].map { |s| s['hostname'] }
       expect(hostnames).to include('foo.com')
+    end
+
+    it 'adds applications' do
+      apps = data['applications'].map { |a| a['cookbook_name'] }
+      expect(apps).to include('static_site')
+    end
+
+    it 'adds application path' do
+      app = data['applications'].first
+      expect(app.keys).to include("path")
+    end
+
+    it 'adds application id' do
+      app = data['applications'].first
+      expect(app.keys).to include('id')
+    end
+
+    it 'includes site data in applications' do
+      app = data['applications'].first
+      expect(app['site']).to be_a(Hash)
+      expect(app['site'].keys).to include("hostname")
     end
 
   end

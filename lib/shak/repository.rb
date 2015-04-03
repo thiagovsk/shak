@@ -15,7 +15,7 @@ module Shak
     end
 
     def run_list
-      (['recipe[shak]'] + sites.all.map { |s| s.run_list }).flatten
+      (sites.all.map { |s| s.run_list }).flatten + ['recipe[shak]']
     end
 
     def ==(other)

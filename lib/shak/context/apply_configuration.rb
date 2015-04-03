@@ -30,18 +30,42 @@ module Shak
 
       def generate_json_attributes_file
         f = Tempfile.new('shak.json')
+
+        sites = repository.sites.all
+
         data = {
           "run_list" => repository.run_list,
-          "sites" => repository.sites.all.map do |s|
-            {
-              "hostname" => s.hostname,
-              # FIXME other attributes
-            }
+          "sites" => sites.map do |s|
+            site_data(s)
           end,
+          'applications' => sites.map do |s|
+            s.applications.all.map do |a|
+              {
+                "site" => site_data(s),
+              }.merge(app_data(a))
+            end
+          end.flatten,
         }
+
         f.write(JSON.pretty_generate(data))
         f.close
         f.path
+      end
+
+      def site_data(s)
+        {
+          "hostname" => s.hostname,
+          # FIXME other attributes
+        }
+      end
+
+      def app_data(a)
+        {
+          "cookbook_name" => a.cookbook_name,
+          "path" => a.path,
+          "id" => a.filename_id,
+          # FIXME other attributes
+        }
       end
 
     end
