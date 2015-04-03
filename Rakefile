@@ -11,7 +11,7 @@ end
 
 task :default => :spec
 
-desc 'Runs unit tests with Rspec)'
+desc 'Runs unit tests with Rspec'
 task :spec do
   sh 'rspec', '--color'
 end
