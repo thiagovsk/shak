@@ -2,6 +2,7 @@ require 'spec_helper'
 
 require 'shak/repository'
 require 'shak/site'
+require 'shak/application'
 require 'shak/context/apply_configuration'
 
 describe Shak::Context::ApplyConfiguration do

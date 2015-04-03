@@ -1,5 +1,7 @@
 require 'yaml'
 
+require 'shak/site'
+
 module Shak
     class SiteSerializer
 

@@ -1,5 +1,7 @@
 require 'yaml'
 
+require 'shak/application'
+
 module Shak
   class ApplicationSerializer
 

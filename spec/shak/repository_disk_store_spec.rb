@@ -3,9 +3,6 @@ require "spec_helper"
 require 'securerandom'
 
 require 'shak/repository_disk_store'
-require 'shak/repository'
-require 'shak/site'
-require 'shak/application'
 
 describe Shak::RepositoryDiskStore do
 
