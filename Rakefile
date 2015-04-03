@@ -55,3 +55,8 @@ task :cookbook do
   cookbook = $stdin.gets.strip
   sh 'knife', 'cookbook', 'create', cookbook, '-o', 'cookbooks/'
 end
+
+desc 'Find TODO|FIXME in the code'
+task :todo do
+  sh 'ack', '--ignore-file=is:Rakefile', '-C', 'TODO|FIXME'
+end
