@@ -10,7 +10,7 @@ module Shak
 
     # Writes +repository+ to disk.
     def write(repository)
-      FileUtils.mkdir_p(Shak.config.data_dir)
+      FileUtils.mkdir_p(Shak.config.repository_dir)
       repository.sites.each do |site|
         write_site(site)
         site.applications.each do |app|
@@ -28,14 +28,14 @@ module Shak
     # Reads a repository from disk. Returns an instance of Shak::Repository
     def read
       repository = Shak::Repository.new
-      if !Dir.exist?(Shak.config.data_dir)
+      if !Dir.exist?(Shak.config.repository_dir)
         return repository
       end
 
       site_reader = Shak::SiteSerializer.new
       app_reader = Shak::ApplicationSerializer.new
 
-      Dir.chdir(Shak.config.data_dir) do
+      Dir.chdir(Shak.config.repository_dir) do
         Dir.glob('*.yaml').each do |data|
           site = File.open(data) do |f|
             site_reader.read(f)
@@ -58,7 +58,7 @@ module Shak
     private
 
     def path_to(filename)
-      File.join(Shak.config.data_dir, filename)
+      File.join(Shak.config.repository_dir, filename)
     end
 
     def site_dir(site)

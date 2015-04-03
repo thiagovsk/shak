@@ -38,7 +38,7 @@ describe Shak::RepositoryDiskStore do
   end
 
   let(:repository_files) do
-    Dir.chdir(Shak.config.data_dir) { Dir.glob('**/*') }
+    Dir.chdir(Shak.config.repository_dir) { Dir.glob('**/*') }
   end
 
   it 'writes a repository' do
