@@ -4,7 +4,7 @@ require 'shak/context/traverse'
 
 command :show do |c|
   c.syntax = 'shak show [OPTIONS]'
-  c.syntax = 'Shows installed sites and applications'
+  c.description = 'Shows installed sites and applications'
   c.action do |args, options|
     fail_usage(c) if args.size > 0
 
