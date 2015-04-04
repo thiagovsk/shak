@@ -3,14 +3,41 @@ require 'shak/cookbook'
 
 Shak::Cookbook.all.each do |cookbook|
 
-  describe cookbook do
-    let(:contents) { Dir.glob("cookbooks/#{cookbook.name}/**/*") }
+  path = "cookbooks/#{cookbook.name}"
+
+  describe path do
+
+    before(:all) do
+      @pwd = Dir.pwd
+      Dir.chdir(path)
+    end
+
+    after(:all) do
+      Dir.chdir(@pwd)
+    end
+
+    let(:contents) { Dir.glob('**/*') }
     let(:directories) { contents.select { |d| File.directory?(d) } }
 
-    it 'does not contain empty directories' do
+    it 'contains no empty directories' do
       empty_dirs = directories.select { |d| Dir.glob("#{d}/**/*").empty? }
       expect(empty_dirs).to eq([])
     end
+
+    it 'contains metadata.rb' do
+      expect(contents).to include('metadata.rb')
+    end
+
+    it 'contains valid Ruby code in metadata.rb' do
+      check = IO.popen(['ruby', '-c', 'metadata.rb'])
+      check.close
+      expect($?.exitstatus).to be(0)
+    end
+
+    it 'contains a README.md' do
+      expect(contents).to include('README.md')
+    end
+
   end
 
 end
