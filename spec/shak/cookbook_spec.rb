@@ -23,5 +23,8 @@ describe Shak::Cookbook do
     end
   end
 
+  it 'has a path' do
+    expect(Shak::Cookbook['shak'].path).to be_a(String)
+  end
 
 end

@@ -37,10 +37,13 @@ module Shak
       name
     end
 
+    attr_reader :path
+
     private
 
     def initialize(name)
       @name = name
+      @path = File.join(self.class.path, name)
     end
 
   end
