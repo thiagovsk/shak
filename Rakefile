@@ -13,7 +13,7 @@ task :default => :spec
 
 desc 'Runs unit tests with Rspec'
 task :spec do
-  sh 'rspec', '--color'
+  sh 'rspec'
 end
 
 desc 'Installs files into DESTDIR (or /)'
