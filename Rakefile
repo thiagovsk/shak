@@ -16,6 +16,20 @@ task :spec do
   sh 'rspec' unless Rake.application.rakefile != 'Rakefile'
 end
 
+desc 'Runs functional tests (against Debian package, using autopkgtest)'
+task :test, :adt_args do |t, args|
+
+  changes = Dir.glob('pkg/*.changes').first
+  if !changes
+    Rake::Task[:deb].invoke
+    changes = Dir.glob('pkg/*.changes').first
+  end
+
+  adt_args = String(args[:adt_args]).split
+
+  sh 'adt-run', changes, *adt_args, '---', 'lxc', '--sudo', '--ephemeral', 'adt-jessie', '--', '--union-type', 'aufs'
+end
+
 desc 'Installs files into DESTDIR (or /)'
 task :install do
   destdir = ENV.fetch('DESTDIR', '/')

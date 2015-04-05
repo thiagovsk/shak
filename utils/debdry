@@ -6,3 +6,12 @@ dh-make-ruby --no-wnpp-check --package shak .
 cp changelog debian/changelog
 ln -sf ../Rakefile debian/dh_ruby.rake
 echo '3.0 (native)' > debian/source/format
+
+rm -rf debian/tests
+mkdir -p debian/tests
+for f in $(find test/ cookbooks/*/test -type f -executable); do
+  echo Test-Command: $f
+  echo Depends: @, curl
+  echo Restrictions: breaks-testbed needs-root allow-stderr isolation-container
+  echo
+done > debian/tests/control <<EOF

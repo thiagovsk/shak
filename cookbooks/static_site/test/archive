@@ -1,0 +1,15 @@
+#!/bin/sh
+
+set -ex
+
+msg="Hello, world from a tarball"
+
+tmpdir=$(mktemp -d)
+echo "$msg" > $tmpdir/index.html
+(cd $tmpdir && tar caf site.tar.gz index.html)
+
+shak add-site foo.dev
+shak add-app foo.dev static_site / site_type=archive archive=@$tmpdir/site.tar.gz
+shak apply --verbose
+
+curl --resolve foo.dev:80:127.0.0.1 http://foo.dev/ | grep "$msg"
