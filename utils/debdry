@@ -2,6 +2,10 @@
 
 set -e
 
+if [ "$1" = '--version' ]; then
+  exec /usr/bin/debdry --version
+fi
+
 runtime_pkgs=$(utils/deps runtime)
 test_pkgs=$(utils/deps test)
 

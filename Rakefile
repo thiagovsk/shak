@@ -17,14 +17,9 @@ task :spec do
 end
 
 desc 'Runs functional tests (against Debian package, using autopkgtest)'
-task :test, :adt_args do |t, args|
+task :test, [:adt_args] => :deb do |t, args|
 
   changes = Dir.glob('pkg/*.changes').first
-  if !changes
-    Rake::Task[:deb].invoke
-    changes = Dir.glob('pkg/*.changes').first
-  end
-
   adt_args = String(args[:adt_args]).split
 
   sh 'adt-run', changes, *adt_args, '---', 'lxc', '--sudo', '--ephemeral', 'adt-jessie', '--', '--union-type', 'aufs'
@@ -53,9 +48,23 @@ end
 
 desc 'Builds Debian package'
 task :deb do
-  mkdir_p 'pkg'
-  ENV['PATH'] = [File.expand_path('utils'), ENV['PATH']].join(':')
-  sh 'git', 'debdry-build', '--git-export-dir=pkg'
+  if !system('git diff-index --quiet HEAD')
+    fail "Can't build package; you have uncommitted changes"
+  end
+
+  head = `git log --max-count=1 --format=%H`.strip
+  pkg_head = nil
+  if File.exist?('pkg/head')
+    pkg_head = File.read('pkg/head').strip
+  end
+
+  if head != pkg_head
+    rm_rf 'pkg'
+    mkdir_p 'pkg'
+    ENV['PATH'] = [File.expand_path('utils'), ENV['PATH']].join(':')
+    sh 'git', 'debdry-build', '--git-export-dir=pkg'
+    File.open('pkg/head', 'w') { |f| f.puts(head) }
+  end
 end
 
 desc 'Edits changelog'
