@@ -13,7 +13,7 @@ task :default => :spec
 
 desc 'Runs unit tests with Rspec'
 task :spec do
-  sh 'rspec'
+  sh 'rspec' unless Rake.application.rakefile != 'Rakefile'
 end
 
 desc 'Installs files into DESTDIR (or /)'
