@@ -1,7 +1,7 @@
 require 'tempfile'
 require 'json'
 
-
+require 'shak'
 require 'shak/context/base'
 
 module Shak
@@ -11,7 +11,7 @@ module Shak
       def apply!
         solo_config = generate_solo_configuration
         json_attributes = generate_json_attributes_file
-        system(
+        Shak.run(
           'sudo', 'chef-solo',
           '--json-attributes', json_attributes,
           '--config', solo_config

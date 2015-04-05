@@ -70,7 +70,7 @@ describe Shak::Context::ApplyConfiguration do
     expect(apply).to receive(:generate_json_attributes_file).and_return('/path/to/json')
     expect(apply).to receive(:generate_solo_configuration).and_return('/path/to/config')
 
-    expect(apply).to receive(:system).with('sudo', 'chef-solo', '--json-attributes', '/path/to/json', '--config', '/path/to/config')
+    expect(Shak).to receive(:run).with('sudo', 'chef-solo', '--json-attributes', '/path/to/json', '--config', '/path/to/config')
 
     apply.apply!
   end

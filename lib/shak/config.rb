@@ -2,6 +2,8 @@ module Shak
 
   class Config
 
+    attr_accessor :verbose
+
     def data_dir
       @data_dir ||= ENV['SHAK_DATA_DIR'] || '/var/lib/shak'
     end

@@ -12,6 +12,10 @@ module Shak
       program :version, Shak::VERSION
       program :description, 'shak command line interface'
 
+      global_option('-v', '--verbose') do
+        Shak.config.verbose = true
+      end
+
       # load subcommands
       Dir.glob(File.join(File.dirname(__FILE__), 'cli', '*.rb')).each do |f|
         instance_eval File.read(f), f
