@@ -1,5 +1,6 @@
 require 'spec_helper'
 require 'shak/cookbook'
+require 'shak/cookbook_input'
 
 Shak::Cookbook.all.each do |cookbook|
 
@@ -36,6 +37,10 @@ Shak::Cookbook.all.each do |cookbook|
 
     it 'contains a README.md' do
       expect(contents).to include('README.md')
+    end
+
+    it 'contains a valid input file (if any)' do
+      cookbook.input.check_semantics!
     end
 
   end

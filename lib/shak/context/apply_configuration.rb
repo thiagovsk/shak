@@ -61,11 +61,11 @@ module Shak
 
       def app_data(a)
         {
+          "name" => a.name,
           "cookbook_name" => a.cookbook_name,
           "path" => a.path,
           "id" => a.filename_id,
-          # FIXME other attributes
-        }
+        }.merge(a.input_data)
       end
 
     end

@@ -1,4 +1,5 @@
 require 'shak'
+require 'shak/cookbook_input'
 
 module Shak
 
@@ -38,6 +39,15 @@ module Shak
     end
 
     attr_reader :path
+
+    def input
+      Shak::CookbookInput.new.tap do |input|
+        input_file = File.join(path, 'input.rb')
+        if File.exists?(input_file)
+          input.instance_eval(File.read(input_file), input_file)
+        end
+      end
+    end
 
     private
 

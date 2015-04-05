@@ -11,7 +11,7 @@ describe Shak::RepositoryDiskStore do
   def new_application(path)
     Shak::Application.new(
       :name => 'Application at ' + path,
-      :cookbook_name => path,
+      :cookbook_name => 'shak',
       :path => '/' + path,
     )
   end

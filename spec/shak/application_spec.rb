@@ -22,7 +22,7 @@ describe Shak::Application do
     let(:app1) do
       app1 = Shak::Application.new(
         name: 'My app',
-        cookbook_name: 'myapp',
+        cookbook_name: 'shak',
         path: '/myapp'
       )
     end
@@ -38,7 +38,7 @@ describe Shak::Application do
     end
 
     it 'is not equal if cookbook data changes' do
-      app2.cookbook_data = { 'foo' => 'bar' }
+      expect(app2).to receive(:input).and_return(Object.new)
       expect(app2).to_not eq(app1)
     end
   end
