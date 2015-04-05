@@ -2,8 +2,12 @@
 
 set -e
 
+runtime_pkgs=$(utils/deps runtime)
+test_pkgs=$(utils/deps test)
+
 dh-make-ruby --no-wnpp-check --package shak .
 cp changelog debian/changelog
+sed -i -e "s/Depends:.*/&, $runtime_pkgs/" debian/control
 ln -sf ../Rakefile debian/dh_ruby.rake
 echo '3.0 (native)' > debian/source/format
 
@@ -11,7 +15,7 @@ rm -rf debian/tests
 mkdir -p debian/tests
 for f in $(find test/ cookbooks/*/test -type f -executable); do
   echo Test-Command: $f
-  echo Depends: @, curl
+  echo Depends: @, $test_pkgs
   echo Restrictions: breaks-testbed needs-root allow-stderr isolation-container
   echo
 done > debian/tests/control <<EOF

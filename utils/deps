@@ -1,0 +1,7 @@
+#!/usr/bin/env ruby
+
+require 'yaml'
+
+pkgs = Array(YAML.load_file("dependencies.yml")[ARGV.first])
+
+puts pkgs.join(', ')

@@ -1,0 +1,5 @@
+# non-Ruby dependencies (Debian packages)
+runtime:
+  - sudo
+test:
+  - curl
