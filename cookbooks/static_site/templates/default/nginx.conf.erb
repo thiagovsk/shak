@@ -1,0 +1,7 @@
+<% if @app['path'] == '/' %>
+root <%= @app['directory'] %>;
+<% else %>
+location <%= @app['path'] %> {
+  alias <%= @app['directory'] %>;
+}
+<% end %>
