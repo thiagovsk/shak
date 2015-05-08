@@ -19,7 +19,7 @@ module Shak
     end
 
     def ==(other)
-      self.sites == other.sites
+      self.sites == other.sites if defined? other.sites
     end
 
   end
