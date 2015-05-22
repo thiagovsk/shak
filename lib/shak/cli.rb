@@ -1,3 +1,4 @@
+require 'shak'
 require 'shak/version'
 require 'commander'
 
@@ -21,7 +22,12 @@ module Shak
         instance_eval File.read(f), f
       end
 
-      run!
+      begin
+        run!
+      rescue Shak::CommandFailed => ex
+        puts "E: #{ex.message}"
+        exit ex.exit_status
+      end
 
       finish_pager
     end
