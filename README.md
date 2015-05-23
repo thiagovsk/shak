@@ -21,6 +21,9 @@ TODO: Write usage instructions here
 
 ## Contributing
 
+Se [HACKING.md](HACKING.md) for instructions for setting up a development
+environment.
+
 1. Fork it ( https://gitlab.com/terceiro/shak )
 2. Create your feature branch (`git checkout -b my-new-feature`)
 3. Commit your changes (`git commit -am 'Add some feature'`)

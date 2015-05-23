@@ -4,7 +4,7 @@ set -e
 
 export DEBIAN_FRONTEND=noninteractive
 
-sudo apt-get install -qy dctrl-tools debdry gem2deb apt-file
+sudo apt-get install -qy dctrl-tools debdry gem2deb apt-file ruby-commander ruby-text-table
 
 if [ -d /vagrant ]; then
   for env in "$@"; do
