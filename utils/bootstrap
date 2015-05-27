@@ -2,9 +2,8 @@
 
 set -e
 
-export DEBIAN_FRONTEND=noninteractive
-
-sudo apt-get install -qy dctrl-tools debdry gem2deb apt-file ruby-commander ruby-text-table
+sudo DEBIAN_FRONTEND=noninteractive apt-get install -qy \
+  ruby chef ruby-commander ruby-text-table
 
 if [ -d /vagrant ]; then
   for env in "$@"; do
@@ -12,15 +11,14 @@ if [ -d /vagrant ]; then
       echo "export $env" >> ~/.bashrc
     fi
   done
+  if ! grep -q /vagrant/.env ~/.bashrc; then
+    echo 'PWD=/vagrant . /vagrant/.env' >> ~/.bashrc
+  fi
   if [ ! -f ~/.bash_profile ]; then
     echo ". ~/.bashrc" > ~/.bash_profile
   fi
   cd /vagrant
 fi
 
-apt-file update
-./utils/debdry
-grep-dctrl -n -s Depends,Build-Depends . debian/control | sed -e 's/,\s*/\n/g; s/|\s*\S*//; s/${[^}]*}//g; s/([^)]*)//g' | xargs sudo DEBIAN_FRONTEND=$DEBIAN_FRONTEND apt-get install -qy
-rm -rf debian
 sudo systemctl stop chef-client
 sudo systemctl disable chef-client
