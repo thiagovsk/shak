@@ -2,7 +2,7 @@ class Chef
   class Recipe
 
     def nginx_config_files
-      @nginx_config_files ||= []
+      @@nginx_config_files ||= []
     end
 
     def nginx_config_site(site)
