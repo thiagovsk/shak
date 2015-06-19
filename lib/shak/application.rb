@@ -7,7 +7,6 @@ module Shak
     attr_accessor :path
     attr_accessor :name
     attr_accessor :cookbook_name
-
     attr_accessor :site
 
     def initialize(data=nil)
@@ -61,6 +60,15 @@ module Shak
 
     def filename_id
       path.gsub('/', '_')
+    end
+
+    def instance_id
+      instance_name  = site.hostname.gsub('.', '_')
+      if path == '/' || path == ''
+        instance_name
+      else
+        instance_name + '_at' + path.gsub('/','_')
+      end
     end
 
     def ==(other)
