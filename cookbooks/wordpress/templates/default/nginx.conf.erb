@@ -1,0 +1,16 @@
+<% if @app['path'] == '/' %>
+
+root /usr/share/wordpress/;
+location / {
+  <%= render "_nginx.erb", cookbook: "wordpress" %>
+  try_files $uri $uri/ /index.html;
+}
+
+<% else %>
+
+location <%= @app['path'] %> {
+  <%= render "_nginx.erb", cookbook: "wordpress" %>
+  alias /usr/share/wordpress/;
+}
+
+<% end %>

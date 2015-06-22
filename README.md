@@ -24,7 +24,7 @@ TODO: Write usage instructions here
 Se [HACKING.md](HACKING.md) for instructions for setting up a development
 environment.
 
-1. Fork it ( https://gitlab.com/terceiro/shak )
+1. Fork it ( https://gitlab.com/shak/shak )
 2. Create your feature branch (`git checkout -b my-new-feature`)
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)

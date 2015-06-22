@@ -58,4 +58,37 @@ describe Shak::Application do
     end
   end
 
+  context 'Check attributes:' do
+
+    def test_app(cookbook, hostname, path)
+      Shak::Application.new(
+        name: 'My app',
+        cookbook_name: cookbook,
+        path: path,
+        site: Shak::Site.new(hostname: hostname)
+      )
+    end
+
+    it "handles hostname without path" do
+      instance_id = test_app('foo', 'example.com', '').instance_id
+      expect(instance_id).to eq("example_com")
+    end
+
+    it "handles hostname with path / " do
+      instance_id = test_app('foo', 'example.com', '/').instance_id
+      expect(instance_id).to eq("example_com")
+    end
+
+    it "handles hostname with path" do
+      instance_id = test_app('foo', 'example.com', '/foo').instance_id
+      expect(instance_id).to eq("example_com_at_foo")
+    end
+
+    it "handles hostname and path with two components" do
+      instance_id = test_app('foo', 'example.com', '/foo/bar').instance_id
+      expect(instance_id).to eq("example_com_at_foo_bar")
+    end
+
+  end
+
 end

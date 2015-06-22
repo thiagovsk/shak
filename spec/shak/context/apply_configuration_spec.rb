@@ -19,7 +19,7 @@ describe Shak::Context::ApplyConfiguration do
       allow(repository).to receive(:run_list).and_return(['recipe[shak]'])
 
       site = Shak::Site.new(hostname: 'foo.com')
-      app = Shak::Application.new(cookbook_name: 'static_site')
+      app = Shak::Application.new(cookbook_name: 'static_site', site: site)
       site.applications.add app
       repository.sites.add site
     end

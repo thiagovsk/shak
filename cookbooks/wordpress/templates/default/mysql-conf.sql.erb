@@ -1,0 +1,6 @@
+CREATE DATABASE <%= @app['instance_id'] %>;
+GRANT SELECT,INSERT,UPDATE,DELETE,CREATE,DROP,ALTER
+ON <%= @app['instance_id'] %>.*
+TO <%= @app['instance_id'] %>@localhost
+IDENTIFIED BY 'password';
+FLUSH PRIVILEGES;
