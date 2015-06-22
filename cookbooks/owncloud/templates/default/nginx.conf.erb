@@ -1,0 +1,16 @@
+<% if @app['path'] == '/' %>
+
+root /usr/share/owncloud/;
+
+location / {
+  <%= render "_nginx.erb", cookbook: "owncloud" %>
+}
+
+<% else %>
+
+location <%= @app['path'] %> {
+  <%= render "_nginx.erb", cookbook: "owncloud" %>
+  alias <%= @app['directory'] %>;
+}
+
+<% end %>

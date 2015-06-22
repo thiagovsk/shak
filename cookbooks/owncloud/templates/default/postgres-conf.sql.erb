@@ -1,0 +1,7 @@
+<% username = @app['instance_id']%>
+<% database = @app['instance_id']%>
+
+CREATE USER <%= username %>  WITH PASSWORD 'password';
+CREATE DATABASE <%= database %> TEMPLATE template0 ENCODING 'UNICODE';
+ALTER DATABASE <%= database %> OWNER TO <%= username %>;
+GRANT ALL PRIVILEGES ON DATABASE <%= database %> TO <%= username %>;
