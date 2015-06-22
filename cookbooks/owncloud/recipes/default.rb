@@ -38,7 +38,6 @@ each_instance_of("owncloud") do |app|
     path "/etc/owncloud/autoconfig.php"
     source "autoconfig.php.erb"
     variables :app => app
-    not_if "test -e /etc/owncloud/autoconfig.php"
   end
 
   template "#{app['instance_id']}: create database_#{app['instance_id']}.sql" do
