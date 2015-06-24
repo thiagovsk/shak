@@ -1,4 +1,4 @@
-require 'shak/context/add_app'
+require 'shak/operation/add_app'
 
 command :'add-app' do |c|
   c.syntax = 'shak add-app [OPTIONS] HOSTNAME APP PATH [KEY=VALUE ...]'
@@ -14,7 +14,7 @@ command :'add-app' do |c|
 
     extra_data = parse_extra_data(args)
 
-    add_app = Shak::Context::AddApp.new
+    add_app = Shak::Operation::AddApp.new
     add_app.add!(hostname, appname, path, extra_data)
 
   end

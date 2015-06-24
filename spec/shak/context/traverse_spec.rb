@@ -1,8 +1,8 @@
 require 'spec_helper'
 
-require 'shak/context/traverse'
+require 'shak/operation/traverse'
 
-describe Shak::Context::Traverse do
+describe Shak::Operation::Traverse do
 
   let(:traverse) { described_class.new }
   let(:repository) { traverse.repository }

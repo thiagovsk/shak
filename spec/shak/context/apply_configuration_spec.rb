@@ -3,11 +3,11 @@ require 'spec_helper'
 require 'shak/repository'
 require 'shak/site'
 require 'shak/application'
-require 'shak/context/apply_configuration'
+require 'shak/operation/apply_configuration'
 
-describe Shak::Context::ApplyConfiguration do
+describe Shak::Operation::ApplyConfiguration do
 
-  let(:apply) { Shak::Context::ApplyConfiguration.new }
+  let(:apply) { Shak::Operation::ApplyConfiguration.new }
   let(:repository) { apply.repository }
 
   it 'references repository' do

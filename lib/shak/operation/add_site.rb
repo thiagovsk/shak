@@ -1,8 +1,8 @@
-require 'shak/context/base'
+require 'shak/operation/base'
 require 'shak/site'
 
 module Shak
-  module Context
+  module Operation
     class AddSite < Base
 
       class SiteAlreadyExists < Exception

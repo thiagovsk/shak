@@ -1,10 +1,10 @@
 require 'spec_helper'
 
-require 'shak/context/add_site'
+require 'shak/operation/add_site'
 
-describe Shak::Context::AddSite do
+describe Shak::Operation::AddSite do
 
-  let(:add_site) { Shak::Context::AddSite.new }
+  let(:add_site) { Shak::Operation::AddSite.new }
   let(:repository) { add_site.repository }
 
   it 'contains a repository instance' do
@@ -29,10 +29,10 @@ describe Shak::Context::AddSite do
     expect(lambda do
       2.times do
         # use a fresh instance to emulate multiple executions
-        add_site = Shak::Context::AddSite.new
+        add_site = Shak::Operation::AddSite.new
         add_site.add!('foo.com')
       end
-    end).to raise_error(Shak::Context::AddSite::SiteAlreadyExists)
+    end).to raise_error(Shak::Operation::AddSite::SiteAlreadyExists)
   end
 
   it 'processes options' do

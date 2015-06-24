@@ -1,4 +1,4 @@
-require 'shak/context/apply_configuration'
+require 'shak/operation/apply_configuration'
 
 command :apply do |c|
   c.syntax = 'shak apply [OPTIONS]'
@@ -8,7 +8,7 @@ command :apply do |c|
       fail 'usage: ' + c.syntax
     end
 
-    configuration = Shak::Context::ApplyConfiguration.new
+    configuration = Shak::Operation::ApplyConfiguration.new
     configuration.apply!
   end
 

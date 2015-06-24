@@ -1,7 +1,7 @@
-require 'shak/context/base'
+require 'shak/operation/base'
 
 module Shak
-  module Context
+  module Operation
     class Traverse < Base
 
       def each_app

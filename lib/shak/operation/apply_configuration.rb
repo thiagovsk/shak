@@ -2,10 +2,10 @@ require 'tempfile'
 require 'json'
 
 require 'shak'
-require 'shak/context/base'
+require 'shak/operation/base'
 
 module Shak
-  module Context
+  module Operation
     class ApplyConfiguration < Base
 
       def apply!

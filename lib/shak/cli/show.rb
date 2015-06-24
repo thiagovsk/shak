@@ -1,6 +1,6 @@
 require 'text-table'
 
-require 'shak/context/traverse'
+require 'shak/operation/traverse'
 
 command :show do |c|
   c.syntax = 'shak show [OPTIONS]'
@@ -8,7 +8,7 @@ command :show do |c|
   c.action do |args, options|
     fail_usage(c) if args.size > 0
 
-    traversal = Shak::Context::Traverse.new
+    traversal = Shak::Operation::Traverse.new
 
     table = Text::Table.new
     table.head = ['Site', 'Application', 'Path']

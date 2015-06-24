@@ -1,4 +1,4 @@
-require 'shak/context/add_site'
+require 'shak/operation/add_site'
 
 command :'add-site' do |c|
   c.syntax = 'shak add-site [OPTIONS] NAME [KEY=VALUE ...]'
@@ -11,7 +11,7 @@ command :'add-site' do |c|
     hostname = args.shift
     data = parse_extra_data(args)
 
-    add_site = Shak::Context::AddSite.new
+    add_site = Shak::Operation::AddSite.new
 
     add_site.add!(hostname, data)
 

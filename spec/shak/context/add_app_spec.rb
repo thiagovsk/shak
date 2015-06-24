@@ -1,9 +1,9 @@
 require 'spec_helper'
 
 require 'shak/site'
-require 'shak/context/add_app'
+require 'shak/operation/add_app'
 
-describe Shak::Context::AddApp do
+describe Shak::Operation::AddApp do
 
   let(:add_app) do
     described_class.new.tap do |a|
@@ -23,7 +23,7 @@ describe Shak::Context::AddApp do
   it 'needs to add the site first' do
     expect(lambda do
       empty_add_app.add!('foo.com', 'myapp', '/')
-    end).to raise_error(Shak::Context::AddApp::SiteDoesNotExist)
+    end).to raise_error(Shak::Operation::AddApp::SiteDoesNotExist)
   end
 
   context 'adding the app' do
@@ -51,7 +51,7 @@ describe Shak::Context::AddApp do
     expect(lambda do
     add_app.add!('foo.com', 'static_site', '/')
     add_app.add!('foo.com', 'dynamic_site', '/')
-    end).to raise_error(Shak::Context::AddApp::PathAlreadyInUse)
+    end).to raise_error(Shak::Operation::AddApp::PathAlreadyInUse)
   end
 
 end
