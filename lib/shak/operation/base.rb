@@ -14,6 +14,10 @@ module Shak
         @repository ||= store.read
       end
 
+      def write_repository
+        store.write(repository)
+      end
+
     end
   end
 end

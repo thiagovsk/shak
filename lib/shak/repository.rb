@@ -8,10 +8,10 @@ module Shak
   class Repository
 
     extend Forwardable
-    delegate [:each, :find, :add, :remove, :count, :removed] => :applications
+    delegate [:all, :each, :find, :add, :remove, :count, :removed] => :applications
 
     def run_list
-      (applications.all.map { |s| s.run_list }).flatten + ['recipe[shak]']
+      (applications.all.map { |app| "recipe[#{app.name}]" }).flatten + ['recipe[shak]']
     end
 
     def ==(other)
