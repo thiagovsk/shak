@@ -18,10 +18,7 @@ describe Shak::ApplicationSerializer do
   end
 
   it 'writes in YAML format' do
-    app = Shak::Application.new(
-      'name' => 'Some App',
-      'cookbook_name' => 'mycookbook',
-    )
+    app = Shak::Application.new('someapp')
     io = StringIO.new
 
     allow(app).to receive(:input).and_return(input)
@@ -32,27 +29,36 @@ describe Shak::ApplicationSerializer do
 
     data = YAML.load(io.string)
 
-    expect(data['name']).to eq('Some App')
-    expect(data['cookbook_name']).to eq('mycookbook')
+    expect(data['name']).to eq('someapp')
     expect(data['field1']).to eq('value1')
     expect(data['field2']).to eq('value2')
   end
 
   it 'reads YAML format' do
     data = {
-      'name' => 'Some App',
-      'cookbook_name' => 'mycookbook',
-      'path' => '/',
+      'name' => 'someapp',
       'field1' => 'value1',
     }.to_yaml
     allow_any_instance_of(Shak::Application).to receive(:input).and_return(input)
 
     app = serializer.read(StringIO.new(data))
-    expect(app.name).to eq('Some App')
-    expect(app.cookbook_name).to eq('mycookbook')
-    expect(app.path).to eq('/')
+    expect(app.name).to eq('someapp')
     expect(app.field1).to eq('value1')
 
+  end
+
+  it 'does a roundtrip' do
+    allow_any_instance_of(Shak::Application).to receive(:input).and_return(input)
+
+    original = Shak::Application.new('foobar')
+
+    write_buffer = StringIO.new
+    serializer.serialize(original, write_buffer)
+
+    read_buffer = StringIO.new(write_buffer.string)
+    deserialized = serializer.read(read_buffer)
+
+    expect(deserialized).to eq(original)
   end
 
 end

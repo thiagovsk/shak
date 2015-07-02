@@ -1,3 +1,5 @@
+require 'fileutils'
+
 ENV['SHAK_DATA_DIR'] = File.expand_path('../tmp/data', __FILE__)
 
 RSpec.configure do |config|
