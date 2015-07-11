@@ -3,7 +3,7 @@
 set -e
 
 sudo DEBIAN_FRONTEND=noninteractive apt-get install -qy \
-  ruby chef ruby-commander ruby-text-table
+  ruby chef ruby-commander ruby-text-table rake ruby-rspec
 
 if [ -d /vagrant ]; then
   for env in "$@"; do
