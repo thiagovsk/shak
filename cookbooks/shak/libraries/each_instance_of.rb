@@ -1,10 +1,12 @@
 class Chef
   class Recipe
 
-    def sites
-      # using a class variable to share across different recipes (which are
-      # different objects)
-      @@sites ||= node['sites'].to_a
+    def web_sites
+      web_applications.map { |app| app['hostname']}.uniq
+    end
+
+    def web_applications
+      applications.select { |app| app.has_key?('hostname') && app.has_key?('path') }
     end
 
     def applications
@@ -15,7 +17,7 @@ class Chef
 
     def each_instance_of(appname)
       applications.each do |app|
-        if app['cookbook_name'] == appname
+        if app['name'] == appname
           yield app
         end
       end

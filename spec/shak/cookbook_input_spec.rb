@@ -73,6 +73,16 @@ describe Shak::CookbookInput do
     end
   end
 
+  it 'defines unique keys' do
+    input.instance_eval do
+      text :foo
+      text :bar
+      unique :foo, :bar
+    end
+
+    expect(input.unique_keys).to eq([[:foo, :bar]])
+  end
+
 end
 
 # TODO move all specs below to their own files

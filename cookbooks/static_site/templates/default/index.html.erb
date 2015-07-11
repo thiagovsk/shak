@@ -21,13 +21,13 @@
       <tr>
         <td>rsync</td>
         <td>
-          <pre>rsync -avpz /path/to/contents/ <%= @app['site']['hostname']%>:<%= @app['directory'] %>/</pre>
+          <pre>rsync -avpz /path/to/contents/ <%= @app['hostname']%>:<%= @app['directory'] %>/</pre>
         </td>
       </tr>
       <tr>
         <td>scp</td>
         <td>
-          <pre>scp -r /path/to/contents/* <%= @app['site']['hostname']%>:<%= @app['directory'] %>/</pre>
+          <pre>scp -r /path/to/contents/* <%= @app['hostname']%>:<%= @app['directory'] %>/</pre>
         </td>
       </tr>
     </table>

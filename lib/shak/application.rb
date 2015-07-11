@@ -6,6 +6,14 @@ module Shak
 
   class Application
 
+    class InvalidInput < ArgumentError
+      attr_reader :errors
+      def initialize(errors)
+        @errors = errors
+        super('Invalid input')
+      end
+    end
+
     attr_accessor :name
     attr_accessor :id
 
@@ -24,6 +32,24 @@ module Shak
 
     def input
       @input ||= cookbook.input
+    end
+
+    def validate_input!
+      unless input.valid?
+        raise InvalidInput.new(input.errors)
+      end
+    end
+
+    def valid?
+      input.valid?
+    end
+
+    def errors
+      input.errors
+    end
+
+    def has_key?(k)
+      input_data.has_key?(k.to_s)
     end
 
     def input_data

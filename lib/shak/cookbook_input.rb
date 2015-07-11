@@ -34,6 +34,14 @@ module Shak
       __add_field__(name, Shak::CookbookInput::BooleanField, &block)
     end
 
+    def unique(*fields)
+      unique_keys << fields
+    end
+
+    def unique_keys
+      @unique_keys ||= []
+    end
+
     def valid?
       fields.all?(&:valid?)
     end
@@ -71,6 +79,8 @@ end
 module Shak
 
   class CookbookInput
+
+    Error = Struct.new(:name, :value, :message)
 
     class Field
 
@@ -131,7 +141,7 @@ module Shak
       def validate
         return if ignored?
         if mandatory? && (value.nil? || value.empty?)
-          errors << "%s is mandatory" % title
+          errors << Error.new(name, value, "%s is mandatory" % title)
         end
       end
 
