@@ -3,12 +3,42 @@
   <head>
     <title>Site ready for push</title>
     <meta name="generator" value="shak"/>
-    <!-- FIXME -->
-    <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"/>
+    <style type='text/css'>
+body {
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 14px
+}
+.container {
+  margin: auto
+}
+@media screen and (min-width: 960px) {
+  .container {
+    width: 960px;
+  }
+}
+.table {
+  border-collapse: collapse;
+  border-bottom: 1px solid #ddd;
+  width: 100%;
+  overflow-x: auto;
+}
+.table td, .table th {
+  text-align: left;
+  border-top: 1px solid #ddd;
+  padding: 0.5em
+}
+pre {
+  border: 1px solid #ddd;
+  padding: 0.5em;
+  background-color: #f0f0f0;
+  border-radius: 5px;
+}
+
+    </style>
   </head>
   <body>
     <div class='container'>
-    <h1>Site ready for push</h1>
+      <h1><u><%= @app['hostname'] %><%= @app['path'] if @app['path'] != '/' %></u>: site ready for push</h1>
     <p>
     To add contents to this site, push it with SSH. There are different ways to
     do it.
