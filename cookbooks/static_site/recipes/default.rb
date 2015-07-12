@@ -8,8 +8,7 @@ end
 
 each_instance_of('static_site') do |app|
 
-  basedir = '/var/lib/shak/data/static_site'
-  app['directory'] = ::File.join(basedir, app['hostname'], app['id'])
+  app['directory'] = ::File.join('/srv', web_app_id(app))
 
   directory app['directory'] do
     recursive true

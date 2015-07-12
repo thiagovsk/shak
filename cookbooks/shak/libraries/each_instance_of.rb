@@ -22,5 +22,11 @@ class Chef
         end
       end
     end
+
+    def web_app_id(app)
+      hostname = app['hostname']
+      path = app['path'] == '/' ? nil : app['path'].gsub('/', '_')
+      [hostname, path].compact.join
+    end
   end
 end
