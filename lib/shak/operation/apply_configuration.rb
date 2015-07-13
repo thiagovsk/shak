@@ -8,7 +8,7 @@ module Shak
   module Operation
     class ApplyConfiguration < Base
 
-      def apply!
+      def perform
         solo_config = generate_solo_configuration
         json_attributes = generate_json_attributes_file
         Shak.run(
@@ -31,20 +31,11 @@ module Shak
       def generate_json_attributes_file
         f = Tempfile.new('shak.json')
 
-        sites = repository.sites.all
-
         data = {
           "run_list" => repository.run_list,
-          "sites" => sites.map do |s|
-            site_data(s)
-          end,
-          'applications' => sites.map do |s|
-            s.applications.all.map do |a|
-              {
-                "site" => site_data(s),
-              }.merge(app_data(a))
-            end
-          end.flatten,
+          'applications' => repository.all.map do |a|
+            app_data(a)
+          end
         }
 
         f.write(JSON.pretty_generate(data))
@@ -52,19 +43,11 @@ module Shak
         f.path
       end
 
-      def site_data(s)
-        {
-          "hostname" => s.hostname,
-          # FIXME other attributes
-        }
-      end
-
       def app_data(a)
         {
           "name" => a.name,
-          "cookbook_name" => a.cookbook_name,
-          "path" => a.path,
-          "id" => a.filename_id,
+          "cookbook_name" => a.name,
+          "id" => a.instance_id,
           "instance_id" => a.instance_id,
         }.merge(a.input_data)
       end

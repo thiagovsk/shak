@@ -8,18 +8,20 @@ module Shak
   class Repository
 
     extend Forwardable
-    delegate [:each, :find] => :sites
-
-    def sites
-      @sites ||= Shak::SetWithMemory.new
-    end
+    delegate [:all, :each, :find, :add, :remove, :count, :removed] => :applications
 
     def run_list
-      (sites.all.map { |s| s.run_list }).flatten + ['recipe[shak]']
+      (applications.all.map { |app| "recipe[#{app.name}]" }).flatten + ['recipe[shak]']
     end
 
     def ==(other)
-      self.sites == other.sites if defined? other.sites
+      self.applications == other.applications if defined? other.applications
+    end
+
+    protected
+
+    def applications
+      @applications ||= Shak::SetWithMemory.new
     end
 
   end

@@ -1,27 +1,20 @@
 require 'spec_helper'
 
 require 'shak/repository'
-require 'shak/site'
 require 'shak/application'
 require 'shak/operation/apply_configuration'
 
 describe Shak::Operation::ApplyConfiguration do
 
   let(:apply) { Shak::Operation::ApplyConfiguration.new }
-  let(:repository) { apply.repository }
-
-  it 'references repository' do
-    expect(apply.repository).to be(repository)
-  end
+  let(:repository) { apply.send(:repository) }
 
   context 'creating node attributes file' do
     before(:each) do
       allow(repository).to receive(:run_list).and_return(['recipe[shak]'])
 
-      site = Shak::Site.new(hostname: 'foo.com')
-      app = Shak::Application.new(cookbook_name: 'static_site', site: site)
-      site.applications.add app
-      repository.sites.add site
+      app = Shak::Application.new('static_site')
+      repository.add app
     end
 
     let(:config_file) { apply.send(:generate_json_attributes_file) }
@@ -31,30 +24,14 @@ describe Shak::Operation::ApplyConfiguration do
       expect(data['run_list']).to include("recipe[shak]")
     end
 
-    it 'adds hostname of sites' do
-      hostnames = data['sites'].map { |s| s['hostname'] }
-      expect(hostnames).to include('foo.com')
-    end
-
     it 'adds applications' do
-      apps = data['applications'].map { |a| a['cookbook_name'] }
+      apps = data['applications'].map { |a| a['name'] }
       expect(apps).to include('static_site')
-    end
-
-    it 'adds application path' do
-      app = data['applications'].first
-      expect(app.keys).to include("path")
     end
 
     it 'adds application id' do
       app = data['applications'].first
       expect(app.keys).to include('id')
-    end
-
-    it 'includes site data in applications' do
-      app = data['applications'].first
-      expect(app['site']).to be_a(Hash)
-      expect(app['site'].keys).to include("hostname")
     end
 
   end
@@ -72,7 +49,7 @@ describe Shak::Operation::ApplyConfiguration do
 
     expect(Shak).to receive(:run).with('sudo', 'chef-solo', '--json-attributes', '/path/to/json', '--config', '/path/to/config')
 
-    apply.apply!
+    apply.perform
   end
 
 end

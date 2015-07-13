@@ -6,7 +6,7 @@ class Chef
     end
 
     def nginx_config_site(site)
-      hostname = site['hostname']
+      hostname = site
       config = "/var/lib/shak/etc/nginx/#{hostname}.conf"
       nginx_config_files << config
       template config do
@@ -18,13 +18,13 @@ class Chef
     end
 
     def nginx_config_app(app)
-      hostname = app['site']['hostname']
+      hostname = app['hostname']
       id = app['id']
       config = "/var/lib/shak/etc/nginx/#{hostname}/#{id}.conf"
       nginx_config_files << config
       template config do
         source    "nginx.conf.erb"
-        cookbook  app['cookbook_name']
+        cookbook  app['name']
         notifies  :reload, 'service[nginx]'
         variables :app => app
       end

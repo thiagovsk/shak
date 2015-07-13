@@ -11,11 +11,11 @@ file '/etc/nginx/conf.d/shak.conf' do
   notifies :reload, 'service[nginx]'
 end
 
-sites.each do |site|
+web_sites.each do |site|
   nginx_config_site site
 end
 
-applications.each do |app|
+web_applications.each do |app|
   nginx_config_app(app)
 end
 

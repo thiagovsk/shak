@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Site ready for push</title>
+    <meta name="generator" value="shak"/>
+    <style type='text/css'>
+body {
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 14px
+}
+.container {
+  margin: auto
+}
+@media screen and (min-width: 960px) {
+  .container {
+    width: 960px;
+  }
+}
+.table {
+  border-collapse: collapse;
+  border-bottom: 1px solid #ddd;
+  width: 100%;
+  overflow-x: auto;
+}
+.table td, .table th {
+  text-align: left;
+  border-top: 1px solid #ddd;
+  padding: 0.5em
+}
+pre {
+  border: 1px solid #ddd;
+  padding: 0.5em;
+  background-color: #f0f0f0;
+  border-radius: 5px;
+}
+
+    </style>
+  </head>
+  <body>
+    <div class='container'>
+      <h1><u><%= @app['hostname'] %><%= @app['path'] if @app['path'] != '/' %></u>: site ready for push</h1>
+    <p>
+    To add contents to this site, push it with SSH. There are different ways to
+    do it.
+    </p>
+    <table class='table'>
+      <tr>
+        <th>Method</th>
+        <th>Example</th>
+      </tr>
+      <tr>
+        <td>rsync</td>
+        <td>
+          <pre>rsync -avpz /path/to/contents/ <%= @app['hostname']%>:<%= @app['directory'] %>/</pre>
+        </td>
+      </tr>
+      <tr>
+        <td>scp</td>
+        <td>
+          <pre>scp -r /path/to/contents/* <%= @app['hostname']%>:<%= @app['directory'] %>/</pre>
+        </td>
+      </tr>
+    </table>
+    </div>
+  </body>
+</html>
+

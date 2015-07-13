@@ -1,32 +1,55 @@
+require 'uuidtools'
+
 require 'shak/cookbook'
 
 module Shak
 
   class Application
 
-    attr_accessor :path
-    attr_accessor :name
-    attr_accessor :cookbook_name
-    attr_accessor :site
+    class InvalidInput < ArgumentError
+      attr_reader :errors
+      def initialize(errors)
+        @errors = errors
+        super('Invalid input')
+      end
+    end
 
-    def initialize(data=nil)
-      data.each do |k,v|
-        self.send("#{k}=", v)
-      end if data
-      @path ||= '/'
+    attr_accessor :name
+    attr_accessor :id
+
+    def initialize(name=nil, id=nil)
+      @name = name
+      @id = id || UUIDTools::UUID.random_create.to_s
+    end
+
+    def instance_id
+      id.gsub('-', '_')
     end
 
     def cookbook
-      @cookbook ||= Shak::Cookbook[cookbook_name]
-    end
-
-    def cookbook=(cookbook)
-      @cookbook_name = cookbook.name
-      @cookbook = cookbook
+      @cookbook ||= Shak::Cookbook[name]
     end
 
     def input
       @input ||= cookbook.input
+    end
+
+    def validate_input!
+      unless input.valid?
+        raise InvalidInput.new(input.errors)
+      end
+    end
+
+    def valid?
+      input.valid?
+    end
+
+    def errors
+      input.errors
+    end
+
+    def has_key?(k)
+      input_data.has_key?(k.to_s)
     end
 
     def input_data
@@ -56,23 +79,8 @@ module Shak
       end
     end
 
-    alias :id :path
-
-    def filename_id
-      path.gsub('/', '_')
-    end
-
-    def instance_id
-      instance_name  = site.hostname.gsub('.', '_')
-      if path == '/' || path == ''
-        instance_name
-      else
-        instance_name + '_at' + path.gsub('/','_')
-      end
-    end
-
     def ==(other)
-      [ :name, :cookbook_name, :path, :input ].all? { |attr| self.send(attr) == other.send(attr) }
+      [ :name, :id, :input ].all? { |attr| self.send(attr) == other.send(attr) }
     end
 
   end
