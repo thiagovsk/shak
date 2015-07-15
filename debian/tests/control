@@ -1,0 +1,7 @@
+Test-Command: gem2deb-test-runner --autopkgtest 2>&1
+Depends: @, @builddeps@, gem2deb-test-runner
+
+Test-Command: cookbooks/static_site/test/archive
+Depends: @, curl
+Restrictions: breaks-testbed needs-root allow-stderr isolation-container
+

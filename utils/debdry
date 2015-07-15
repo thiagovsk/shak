@@ -2,24 +2,35 @@
 
 set -e
 
-if [ "$1" = '--version' ]; then
-  exec /usr/bin/debdry --version
-fi
-
 runtime_pkgs=$(utils/deps runtime)
 test_pkgs=$(utils/deps test)
 
+mv debian debian.$(date +%s) || true
 dh-make-ruby --no-wnpp-check --package shak .
-cp changelog debian/changelog
-sed -i -e "s/Depends:.*/&, $runtime_pkgs/" debian/control
-ln -sf ../Rakefile debian/dh_ruby.rake
-echo '3.0 (native)' > debian/source/format
 
+# debian/control
+sed -i -e "s/Depends:.*/&, $runtime_pkgs,/" debian/control
+sed -i -e "s/Testsuite:.*/Testsuite: autopkgtest/" debian/control
+sed -i -e '/^Maintainer:/d; s/^Uploaders:/Maintainer:/' debian/control
+sed -i -e 's/^Section:.*/Section: admin/' debian/control
+wrap-and-sort --wrap-always
+
+# native package
+echo '3.0 (native)' > debian/source/format
+rm -f debian/watch
+
+# build
+ln -sf ../Rakefile debian/dh_ruby.rake
+
+# tests
 rm -rf debian/tests
 mkdir -p debian/tests
+echo 'Test-Command: gem2deb-test-runner --autopkgtest 2>&1' >> debian/tests/control
+echo 'Depends: @, @builddeps@, gem2deb-test-runner' >> debian/tests/control
+echo >> debian/tests/control
 for f in $(find test/ cookbooks/*/test -type f -executable); do
   echo Test-Command: $f
   echo Depends: @, $test_pkgs
   echo Restrictions: breaks-testbed needs-root allow-stderr isolation-container
   echo
-done > debian/tests/control <<EOF
+done >> debian/tests/control <<EOF

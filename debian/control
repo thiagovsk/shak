@@ -1,0 +1,37 @@
+Source: shak
+Section: admin
+Priority: optional
+Maintainer: Antonio Terceiro <terceiro@debian.org>
+Build-Depends: chef,
+               debhelper (>= 7.0.50~),
+               gem2deb,
+               rake,
+               ruby-commander,
+               ruby-rspec,
+               ruby-text-table,
+               ruby-uuidtools,
+               sudo
+Standards-Version: 3.9.6
+Vcs-Git: git://anonscm.debian.org/pkg-ruby-extras/shak.git
+Vcs-Browser: https://anonscm.debian.org/cgit/pkg-ruby-extras/shak.git
+Homepage: https://gitlab.com/terceiro/shak
+Testsuite: autopkgtest
+XS-Ruby-Versions: all
+
+Package: shak
+Architecture: all
+XB-Ruby-Versions: ${ruby:Versions}
+Depends: chef,
+         ruby | ruby-interpreter,
+         ruby-commander,
+         ruby-text-table,
+         ruby-uuidtools,
+         sudo,
+         ${misc:Depends},
+         ${shlibs:Depends}
+Description: tool for installing and configuring server applications
+ shak is a tool for managing the deployment of multiple applications to a
+ server, usually a personal one. It allows users without technical
+ knowledge to maintain their own servers at home or in the cloud. shak is
+ opininated; it will setup applications based on distribution packages,
+ and in the most secure way possible.

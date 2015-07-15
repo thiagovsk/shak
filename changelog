@@ -1,5 +1,1 @@
-shak (0.0.2) UNRELEASED; urgency=medium
-
-  * Initial release. (Closes: #XXXXXX)
-
- -- Antonio Terceiro <terceiro@debian.org>  Sat, 28 Feb 2015 13:32:39 -0300
+debian/changelog
