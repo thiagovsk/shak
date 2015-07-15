@@ -5,8 +5,7 @@ set -e
 runtime_pkgs=$(utils/deps runtime)
 test_pkgs=$(utils/deps test)
 
-mv debian debian.$(date +%s) || true
-dh-make-ruby --no-wnpp-check --package shak .
+dh-make-ruby --overwrite --no-wnpp-check --package shak .
 
 # debian/control
 sed -i -e "s/Depends:.*/&, $runtime_pkgs,/" debian/control
@@ -14,6 +13,10 @@ sed -i -e "s/Testsuite:.*/Testsuite: autopkgtest/" debian/control
 sed -i -e '/^Maintainer:/d; s/^Uploaders:/Maintainer:/' debian/control
 sed -i -e 's/^Section:.*/Section: admin/' debian/control
 wrap-and-sort --wrap-always
+
+# file we know don't need to be regenerated
+git checkout -- debian/copyright
+git checkout -- debian/rules
 
 # native package
 echo '3.0 (native)' > debian/source/format
