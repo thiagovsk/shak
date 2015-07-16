@@ -1,0 +1,15 @@
+#!/bin/sh
+
+set -ex
+
+cd ${ADTTMP:-/tmp}
+
+msg="Hello, world!"
+
+shak install static_site hostname=simplesite.example
+
+echo "$msg" | sudo tee /srv/simplesite.example/index.html
+
+curl --fail --resolve simplesite.example:80:127.0.0.1 --output index.html http://simplesite.example/
+
+grep "$msg" index.html
