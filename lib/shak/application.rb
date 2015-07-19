@@ -77,6 +77,10 @@ module Shak
       [ :name, :id, :input ].all? { |attr| self.send(attr) == other.send(attr) }
     end
 
+    def inspect
+      "#{id}(#{name})"
+    end
+
   end
 
 end
