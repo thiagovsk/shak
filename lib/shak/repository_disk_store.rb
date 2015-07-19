@@ -41,7 +41,7 @@ module Shak
     private
 
     def application_file(app)
-      File.join(Shak.config.repository_dir, "#{app.name}_#{app.id}.yaml")
+      File.join(Shak.config.repository_dir, "#{app.id}.yaml")
     end
 
   end

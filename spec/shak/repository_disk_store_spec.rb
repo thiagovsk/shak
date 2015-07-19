@@ -27,8 +27,8 @@ describe Shak::RepositoryDiskStore do
 
   it 'writes a repository' do
     store.write(repository)
-    expect(repository_files).to include('app1_' + app1.id + '.yaml')
-    expect(repository_files).to include('app2_' + app2.id + '.yaml')
+    expect(repository_files).to include(app1.id + '.yaml')
+    expect(repository_files).to include(app2.id + '.yaml')
   end
 
   it 'deletes removed applications' do
