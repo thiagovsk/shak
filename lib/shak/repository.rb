@@ -36,7 +36,7 @@ module Shak
     end
 
     def find(id)
-      backend[id]
+      backend[id] || (raise ArgumentError.new("No application found with ID `#{id}`"))
     end
 
     def remove(app_id)

@@ -53,4 +53,10 @@ describe Shak::Repository do
     end
   end
 
+  context 'finding applications by id' do
+    it 'raise an exception when looking for an unexisting ID' do
+      expect(lambda {repository.find('inexisting')}).to raise_error(ArgumentError)
+    end
+  end
+
 end
