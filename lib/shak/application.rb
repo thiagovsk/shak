@@ -19,11 +19,7 @@ module Shak
 
     def initialize(name, id=nil)
       @name = name
-      @id = id || UUIDTools::UUID.random_create.to_s
-    end
-
-    def instance_id
-      id.gsub('-', '_')
+      @id = id
     end
 
     def cookbook

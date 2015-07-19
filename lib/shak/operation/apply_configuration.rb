@@ -47,8 +47,7 @@ module Shak
         {
           "name" => a.name,
           "cookbook_name" => a.name,
-          "id" => a.instance_id,
-          "instance_id" => a.instance_id,
+          "id" => a.id,
         }.merge(a.input_data)
       end
 

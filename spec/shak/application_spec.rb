@@ -13,14 +13,6 @@ describe Shak::Application do
     end
   end
 
-  context 'calculatring instance_id' do
-    let(:app) { Shak::Application.new('shak', 'foo-bar-baz')}
-    it 'turns dashes into underscores' do
-      expect(app.instance_id).to eq('foo_bar_baz')
-    end
-
-  end
-
   context 'being validated' do
     let(:app) { fake_cookbook('app1'); Shak::Application.new('app1')}
     it 'is valid when input is valid' do

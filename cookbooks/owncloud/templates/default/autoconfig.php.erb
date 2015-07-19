@@ -1,12 +1,12 @@
 <?php
 $AUTOCONFIG = array(
   "dbtype"        => "pgsql",
-  "dbname"        => "<%= @app['instance_id']%>",
-  "dbuser"        => "<%= @app['instance_id']%>",
+  "dbname"        => "<%= @app['id']%>",
+  "dbuser"        => "<%= @app['id']%>",
   "dbpass"        => "password",
   "dbhost"        => "localhost",
   "dbtableprefix" => "oc_",
   "adminlogin"    => "admin",
   "adminpass"     => "password",
-  "directory"     => "/var/lib/owncloud/data_<%= @app['instance_id'] %>",
+  "directory"     => "/var/lib/owncloud/data_<%= @app['id'] %>",
 );
