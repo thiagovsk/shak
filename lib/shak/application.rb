@@ -17,7 +17,7 @@ module Shak
     attr_accessor :name
     attr_accessor :id
 
-    def initialize(name=nil, id=nil)
+    def initialize(name, id=nil)
       @name = name
       @id = id || UUIDTools::UUID.random_create.to_s
     end
