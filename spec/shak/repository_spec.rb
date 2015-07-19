@@ -15,6 +15,17 @@ describe Shak::Repository do
     expect(repository.count).to eq(1)
   end
 
+  it 'generates sequential identifiers' do
+    app1 = Shak::Application.new('foo')
+    app2 = Shak::Application.new('foo')
+
+    repository.add(app1)
+    repository.add(app2)
+
+    expect(app1.id).to eq("foo_1")
+    expect(app2.id).to eq("foo_2")
+  end
+
   context 'producing a run list' do
     it 'runs each application recipe, and shak at the end' do
       repository.add(application)

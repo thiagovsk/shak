@@ -16,9 +16,9 @@ module Shak
       self.backend == other.backend
     end
 
-    def add(item)
-      raise ArgumentError.new("An ID is mandatory!") unless item.id
-      backend[item.id] = item
+    def add(app)
+      app.id ||= next_id(app.name)
+      backend[app.id] = app
     end
 
     def all
@@ -43,6 +43,11 @@ module Shak
     end
 
     protected
+
+    def next_id(name)
+      n = backend.values.select { |app| app.name == name }.size
+      "#{name}_#{n + 1}"
+    end
 
     def backend
       @backend ||= {}
