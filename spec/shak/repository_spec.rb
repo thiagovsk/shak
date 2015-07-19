@@ -17,13 +17,29 @@ describe Shak::Repository do
 
   it 'generates sequential identifiers' do
     app1 = Shak::Application.new('foo')
+    app_with_id = Shak::Application.new('foo', 'mycustomid')
     app2 = Shak::Application.new('foo')
 
+
     repository.add(app1)
+    repository.add(app_with_id)
     repository.add(app2)
 
     expect(app1.id).to eq("foo_1")
     expect(app2.id).to eq("foo_2")
+  end
+
+  it 'does not accept duplicated ids' do
+    app1 = Shak::Application.new('foo', 'myid')
+    app2 = Shak::Application.new('foo', 'myid')
+    repository.add(app1)
+
+    expect(lambda { repository.add(app2)}).to raise_error(ArgumentError)
+  end
+
+  it 'does not accept ids larger than 16 characters' do
+    large_id = Shak::Application.new('foo', 'x' * 17)
+    expect(lambda { repository.add(large_id) }).to raise_error(ArgumentError)
   end
 
   context 'producing a run list' do

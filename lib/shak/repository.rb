@@ -18,6 +18,12 @@ module Shak
 
     def add(app)
       app.id ||= next_id(app.name)
+      if backend[app.id]
+        raise ArgumentError.new("Duplicated ID `#{app.id}`")
+      end
+      if app.id.size > 16
+        raise ArgumentError.new("ID `#{app.id}` is too large (max: 16 characters)")
+      end
       backend[app.id] = app
     end
 
@@ -45,8 +51,13 @@ module Shak
     protected
 
     def next_id(name)
-      n = backend.values.select { |app| app.name == name }.size
-      "#{name}_#{n + 1}"
+      apps = backend.values.select { |app| app.id =~ /^#{name}_(\d+)/ }
+      if apps.size == 0
+        "#{name}_1"
+      else
+        last = apps.map { |app| app.id.split('_').last.to_i }.sort.last
+        "#{name}_#{last + 1}"
+      end
     end
 
     def backend
