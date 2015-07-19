@@ -1,5 +1,3 @@
-require 'uuidtools'
-
 require 'shak/cookbook'
 
 module Shak

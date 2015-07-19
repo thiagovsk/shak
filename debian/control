@@ -9,7 +9,6 @@ Build-Depends: chef,
                ruby-commander,
                ruby-rspec,
                ruby-text-table,
-               ruby-uuidtools,
                sudo
 Standards-Version: 3.9.6
 Vcs-Git: git://anonscm.debian.org/pkg-ruby-extras/shak.git
@@ -25,7 +24,6 @@ Depends: chef,
          ruby | ruby-interpreter,
          ruby-commander,
          ruby-text-table,
-         ruby-uuidtools,
          sudo,
          ${misc:Depends},
          ${shlibs:Depends}

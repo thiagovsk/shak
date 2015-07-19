@@ -35,5 +35,4 @@ Gem::Specification.new do |spec|
   spec.add_runtime_dependency 'chef'
   spec.add_runtime_dependency 'commander'
   spec.add_runtime_dependency 'text-table'
-  spec.add_runtime_dependency 'uuidtools'
 end
