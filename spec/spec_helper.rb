@@ -3,9 +3,12 @@ require 'fileutils'
 ENV['SHAK_DATA_DIR'] = File.expand_path('../tmp/data', __FILE__)
 
 module ShakSpecHelpers
-  def fake_cookbook(name)
+  def fake_cookbook(name, input=nil)
     cookbook = Shak::Cookbook.send(:new, name)
     allow(Shak::Cookbook).to receive(:[]).with(name).and_return(cookbook)
+    if input
+      allow(cookbook).to receive(:input).and_return(input)
+    end
   end
 
   def dont_really_run_commands
