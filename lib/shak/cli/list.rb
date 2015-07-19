@@ -6,7 +6,7 @@ command :list do |c|
   c.syntax = 'shak list'
   c.description = 'lists installed applications'
   c.action do |args,options|
-    fail_usage if args.size != 0
+    fail_usage(c) if args.size != 0
 
     table = Text::Table.new
     table.head = ['Application', 'Id', 'Link']
