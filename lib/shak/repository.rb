@@ -1,27 +1,51 @@
 require 'forwardable'
 
-require 'shak/set_with_memory'
-
 module Shak
 
   # A +Repository+ manages access to the sites hosted at a given server.
   class Repository
 
     extend Forwardable
-    delegate [:all, :each, :find, :add, :remove, :count, :removed] => :applications
+    delegate [:each, :map] => :all
 
     def run_list
-      (applications.all.map { |app| "recipe[#{app.name}]" }).flatten + ['recipe[shak]']
+      map { |app| "recipe[#{app.name}]" }.flatten + ['recipe[shak]']
     end
 
     def ==(other)
-      self.applications == other.applications if defined? other.applications
+      self.backend == other.backend
+    end
+
+    def add(item)
+      raise ArgumentError.new("An ID is mandatory!") unless item.id
+      backend[item.id] = item
+    end
+
+    def all
+      backend.values
+    end
+
+    def count
+      backend.size
+    end
+
+    def find(id)
+      backend[id]
+    end
+
+    def remove(app_id)
+      backend.delete(app_id)
+      removed << app_id
+    end
+
+    def removed
+      @removed ||= []
     end
 
     protected
 
-    def applications
-      @applications ||= Shak::SetWithMemory.new
+    def backend
+      @backend ||= {}
     end
 
   end
