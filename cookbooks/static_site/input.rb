@@ -8,4 +8,9 @@ text :path do
   default '/'
 end
 
+text :user do
+  title 'User'
+  default 'root'
+end
+
 unique :hostname, :path

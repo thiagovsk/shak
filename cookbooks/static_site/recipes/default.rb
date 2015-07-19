@@ -12,6 +12,7 @@ each_instance_of('static_site') do |app|
 
   directory app['directory'] do
     recursive true
+    owner app['user']
   end
 
   index = File.join(app['directory'], 'index.html')
@@ -22,6 +23,7 @@ each_instance_of('static_site') do |app|
     end
     source "index.html.erb"
     variables :app => app
+    owner app['user']
   end
 
 end
