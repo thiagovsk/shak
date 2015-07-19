@@ -18,13 +18,6 @@ module Shak
       end
 
       def perform
-        add_applications
-        apply_configuration
-      end
-
-      protected
-
-      def add_applications
         application.validate_input!
         repository.add(application)
         write_repository
@@ -33,11 +26,6 @@ module Shak
           user_interface.display_error error
         end
         user_interface.abort
-      end
-
-      def apply_configuration
-        apply = Shak::Operation::ApplyConfiguration.new
-        apply.perform
       end
 
     end

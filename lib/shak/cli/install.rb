@@ -27,5 +27,8 @@ command :install do |c|
     install.input_data = input
     install.user_interface = UI.new
     install.perform
+
+    apply = Shak::Operation::ApplyConfiguration.new
+    apply.perform
   end
 end
