@@ -9,7 +9,7 @@ each_instance_of("wordpress") do |app|
   destination_dir = "#{basedir}/#{app['id']}"
 
   template "#{app['id']}: create config.php" do
-    path "/etc/wordpress/config-#{app['site']['hostname']}.php"
+    path "/etc/wordpress/config-#{app['hostname']}.php"
     source "config.php.erb"
     variables :app => app
   end
