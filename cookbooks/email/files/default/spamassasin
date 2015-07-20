@@ -1,0 +1,5 @@
+ENABLED=1
+SPAMD_HOME="/var/log/spamd"
+OPTIONS="--create-prefs --max-children 5 --username spamd --helper-home-dir ${SPAMD_HOME} -s ${SPAMD_HOME}spamd.log"
+PIDFILE="${SPAMD_HOME}spamd.pid"
+CRON=1
