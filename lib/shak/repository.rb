@@ -9,7 +9,7 @@ module Shak
     delegate [:each, :map] => :all
 
     def run_list
-      map { |app| "recipe[#{app.name}]" }.flatten + ['recipe[shak]']
+      preamble_recipes + user_recipes + postamble_recipes
     end
 
     def ==(other)
@@ -62,6 +62,18 @@ module Shak
 
     def backend
       @backend ||= {}
+    end
+
+    def preamble_recipes
+      ['recipe[shak::preconfig]']
+    end
+
+    def user_recipes
+      map { |app| "recipe[#{app.name}]" }.uniq
+    end
+
+    def postamble_recipes
+      ['recipe[shak]']
     end
 
   end

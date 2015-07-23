@@ -43,13 +43,24 @@ describe Shak::Repository do
   end
 
   context 'producing a run list' do
-    it 'runs each application recipe, and shak at the end' do
+    it 'runs shak::preconfig first, other recipes and shak at the end' do
       repository.add(application)
       repository.add(another_application)
-
       allow(application).to receive(:run_list).and_return(['recipe[app1]'])
       allow(another_application).to receive(:run_list).and_return(['recipe[app2]'])
-      expect(repository.run_list).to eq(['recipe[app1]', 'recipe[app2]', 'recipe[shak]'])
+      expect(repository.run_list).to eq([
+        'recipe[shak::preconfig]',
+        'recipe[app1]',
+        'recipe[app2]',
+        'recipe[shak]'
+      ])
+    end
+
+    it 'runs without other recipe, shak::preconfig first and shak at the end' do
+      expect(repository.run_list).to eq([
+        'recipe[shak::preconfig]',
+        'recipe[shak]'
+      ])
     end
   end
 
