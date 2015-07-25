@@ -1,6 +1,11 @@
 <% if @app['path'] == '/' %>
 
 root /usr/share/owncloud/;
+listen 443 ssl;
+
+ssl_certificate /etc/ssl/certs/<%=@app['hostname']%>.pem;
+ssl_certificate_key /etc/ssl/private/<%=@app['hostname']%>.key;
+
 
 location / {
   <%= render "_nginx.erb", cookbook: "owncloud" %>

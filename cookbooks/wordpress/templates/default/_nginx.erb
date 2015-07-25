@@ -3,6 +3,7 @@ index index.php index.html index.htm;
 # pass the PHP scripts to FastCGI server listening on the php-fpm socket
 location ~ \.php$ {
   try_files $uri =404;
+  fastcgi_param HTTPS on;
   include fastcgi_params;
   fastcgi_pass unix:/var/run/php5-fpm.sock;
   fastcgi_index index.php;

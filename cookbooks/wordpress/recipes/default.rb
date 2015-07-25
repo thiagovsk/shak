@@ -21,7 +21,7 @@ each_instance_of("wordpress") do |app|
 
   execute "#{app['id']}: copy wp-content to #{destination_dir}" do
     command "sudo cp #{basedir}/wp-content/ #{destination_dir} -rf"
-    not_if "test -d #{destination_dir}"
+    not_if "test -d #{destination_dir}/wp-content"
   end
 
   template "#{app['id']}: create database.sql" do
