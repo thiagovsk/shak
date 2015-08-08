@@ -1,0 +1,45 @@
+@import bootstrap
+
+#content
+  @extend .container
+  padding-bottom: 15px
+
+h1
+  margin-top: 0px
+  padding-top: 0px
+
+div.app
+  margin-top: 20px
+  padding-bottom: 20px
+  margin-bottom: 20px
+  .app-icon
+    @extend .media-left
+    a
+      display: block
+      width: 64px
+      height: 64px
+      // FIXME
+      background: #eeeeec
+  .app-info
+    @extend .media-body
+    h3
+      margin-top: 0px
+  .app-controls
+    @extend .media-right
+
+div.app-controls
+  a
+    @extend .btn
+    &.edit
+      @extend .btn-primary
+    &.view
+      @extend .btn-success
+
+footer
+  @extend .navbar-default
+  height: 100px
+  padding-top: 20px
+  padding-bottom: 20px
+
+  p
+    @extend .container

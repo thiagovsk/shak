@@ -1,0 +1,32 @@
+doctype html
+html
+  head
+    title
+        | My Slim Templates App
+          #{ENV['RACK_ENV'] != 'production' && "(#{ENV['RACK_ENV']})" || ''}
+    link rel='stylesheet' type='text/css' href='/assets/shak.css'
+
+  body
+    / FIXME too much bootstrap-specific mambo jambo here
+    div.navbar.navbar-default
+      div.container
+        div.navbar-header
+          button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"
+            span.icon-bar
+            span.icon-bar
+            span.icon-bar
+          a.navbar-brand href="/" shak
+        div.collapse.navbar-collapse
+          ul.nav.navbar-nav
+            li: a href="/" My apps
+            li: a href="/browse" All apps
+            li: a href="/doc" Documentation
+            li: a href="/about" About
+
+    #content
+      == yield
+
+    footer
+      markdown:
+        Copyright © #{[2015, Date.today.year].uniq.join(' — ')} the shak development team. shak is licensed under the [Affero GNU General Public License](http://www.gnu.org/licenses/agpl.html), version 3 or (at your option) any later version.
+    script type="text/javascript" src="/assets/shak.js"
