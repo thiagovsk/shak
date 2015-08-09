@@ -16,6 +16,26 @@ module ShakSpecHelpers
   end
 end
 
+unless ENV['ADTTMP']
+  # not running autopkgtest
+  ENV['PATH'] = [File.dirname(__FILE__) + '/../bin', ENV['PATH']].join(':')
+  ENV['RUBYLIB'] = File.dirname(__FILE__) + '/../lib'
+end
+
+require 'open3'
+module ShakCLIHelpers
+  def sh(command)
+    exit_status = nil
+    Open3.popen3(command) do |stdin, stdout, stderr, process|
+      @stdout = stdout.read
+      @stderr = stderr.read
+      exit_status = process.value
+    end
+    expect(exit_status).to eq(0)
+  end
+  attr_reader :stdout, :stderr
+end
+
 require 'shak/operation/install'
 module ShakOperationHelpers
   def install(app, data)
