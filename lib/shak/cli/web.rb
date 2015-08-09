@@ -11,7 +11,7 @@ command :web do |c|
 
     options.default port: 9999
 
-    config_ru = File.expand_path('../../web/app.ru', __FILE__)
+    config_ru = File.expand_path('../../web/config.ru', __FILE__)
     exec 'rackup', '--port', options.port.to_s, config_ru
   end
 end
