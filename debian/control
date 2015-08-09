@@ -3,11 +3,16 @@ Section: admin
 Priority: optional
 Maintainer: Antonio Terceiro <terceiro@debian.org>
 Build-Depends: chef,
-               debhelper (>= 7.0.50~),
+               debhelper (>= 9~),
                gem2deb,
                rake,
+               ruby-bootstrap-sass,
                ruby-commander,
+               ruby-rack-test,
                ruby-rspec,
+               ruby-sinatra,
+               ruby-slim,
+               ruby-sprockets,
                ruby-text-table,
                sudo
 Standards-Version: 3.9.6
@@ -22,7 +27,11 @@ Architecture: all
 XB-Ruby-Versions: ${ruby:Versions}
 Depends: chef,
          ruby | ruby-interpreter,
+         ruby-bootstrap-sass,
          ruby-commander,
+         ruby-sinatra,
+         ruby-slim,
+         ruby-sprockets,
          ruby-text-table,
          sudo,
          ${misc:Depends},

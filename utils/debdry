@@ -12,6 +12,7 @@ sed -i -e "s/Depends:.*/&, $runtime_pkgs,/" debian/control
 sed -i -e "s/Testsuite:.*/Testsuite: autopkgtest/" debian/control
 sed -i -e '/^Maintainer:/d; s/^Uploaders:/Maintainer:/' debian/control
 sed -i -e 's/^Section:.*/Section: admin/' debian/control
+sed -i -e 's/^Build-Depends:/& ruby-rack-test, /' debian/control
 wrap-and-sort --wrap-always
 
 # file we know don't need to be regenerated
