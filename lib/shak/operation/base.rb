@@ -4,6 +4,10 @@ module Shak
   module Operation
 
     class NullUI < BasicObject
+      def display_error(error)
+      end
+      def abort
+      end
     end
 
     class Base
