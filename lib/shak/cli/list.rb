@@ -11,11 +11,9 @@ command :list do |c|
     table = Text::Table.new
     table.head = ['Application', 'Id', 'Link']
 
-    callback = lambda do |app|
+    list = Shak::Operation::List.new do |app|
       table.rows << [app[:name], app[:id], app[:link]]
     end
-
-    list = Shak::Operation::List.new(callback)
     list.perform
 
     if table.rows.size > 0

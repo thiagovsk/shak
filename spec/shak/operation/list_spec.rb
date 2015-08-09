@@ -7,8 +7,7 @@ require 'shak/operation/list'
 describe Shak::Operation::List do
 
   let(:applications) { {} }
-  let(:callback) { lambda { |app| applications[app[:name]] = app }  }
-  let(:list) { described_class.new(callback) }
+  let(:list) { described_class.new { |app| applications[app[:name]] = app } }
 
   def install(app, data={})
     fake_cookbook(app)

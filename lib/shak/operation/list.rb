@@ -2,8 +2,8 @@ require_relative 'base'
 
 class Shak::Operation::List < Shak::Operation::Base
 
-  def initialize(callback)
-    @callback = callback
+  def initialize(&block)
+    @callback = block if block_given?
   end
 
   def perform
