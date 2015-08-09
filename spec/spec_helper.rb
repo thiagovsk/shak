@@ -16,6 +16,16 @@ module ShakSpecHelpers
   end
 end
 
+require 'shak/operation/install'
+module ShakOperationHelpers
+  def install(app, data)
+    dont_really_run_commands
+    installation = Shak::Operation::Install.new(app)
+    installation.input_data = data
+    installation.perform
+  end
+end
+
 RSpec.configure do |config|
   config.include ShakSpecHelpers
   config.before(:each) do
