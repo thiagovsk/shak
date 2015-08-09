@@ -32,7 +32,19 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "rake"
   spec.add_development_dependency "rspec"
 
+  # basic dependencies
   spec.add_runtime_dependency 'chef'
+
+  # CLI dependencies
   spec.add_runtime_dependency 'commander'
   spec.add_runtime_dependency 'text-table'
+
+  # web frontend dependencies
+  spec.add_runtime_dependency 'bootstrap-sass'
+  spec.add_runtime_dependency 'sinatra'
+  spec.add_runtime_dependency 'slim'
+  spec.add_runtime_dependency 'sprockets'
+
+  # web frontend test dependencies
+  spec.add_development_dependency "rack-test"
 end
