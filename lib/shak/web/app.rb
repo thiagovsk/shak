@@ -14,6 +14,10 @@ module Shak
         def _(s)
           s
         end
+
+        def hostname
+          @@hostname ||= `hostname --fqdn`.strip
+        end
       end
 
       # Lists all installed apps
