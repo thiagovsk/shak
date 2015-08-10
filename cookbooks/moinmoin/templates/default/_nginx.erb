@@ -1,0 +1,11 @@
+include uwsgi_params;
+uwsgi_pass unix:///usr/share/moin/server/moin.sock;
+uwsgi_modifier1 30;
+
+location /moin_static[0-9]+/(.*) {
+  alias /usr/lib/python2.7/site-packages/MoinMoin/web/static/htdocs/$1;
+}
+
+location /favicon.ico {
+  alias /usr/lib/python2.7/site-packages/MoinMoin/web/static/htdocs/favicon.ico;
+}

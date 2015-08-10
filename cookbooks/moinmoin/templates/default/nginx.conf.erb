@@ -1,0 +1,16 @@
+<% if @app['path'] == '/' %>
+
+root /usr/share/moin/htdocs;
+
+location / {
+  <%= render "_nginx.erb", cookbook: "moinmoin" %>
+}
+
+<% else %>
+
+location <%= @app['path'] %> {
+  <%= render "_nginx.erb", cookbook: "moinmoin" %>
+  alias <%= @app['directory'] %>;
+}
+
+<% end %>

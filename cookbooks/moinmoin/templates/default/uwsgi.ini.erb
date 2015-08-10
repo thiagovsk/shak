@@ -1,0 +1,12 @@
+[uwsgi]
+socket = /var/run/moin.sock
+chmod-socket = 660
+
+chdir = /usr/share/moin/server
+wsgi-file = moin.wsgi
+
+master
+workers = 3
+max-requests = 200
+harakiri = 30
+die-on-term
