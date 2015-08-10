@@ -1,0 +1,14 @@
+<% if @app['path'] == '/' %>
+
+location / {
+  <%= render "_nginx.erb", cookbook: "moinmoin" %>
+}
+
+<% else %>
+
+location <%= @app['path'] %> {
+  <%= render "_nginx.erb", cookbook: "moinmoin" %>
+  alias <%= @app['directory'] %>;
+}
+
+<% end %>
