@@ -83,3 +83,8 @@ desc 'Find TODO|FIXME in the code'
 task :todo do
   sh 'ack', '--ignore-file=is:Rakefile', '-C', 'TODO|FIXME'
 end
+
+desc 'Runs a Ruby console with the shak code loaded'
+task :console do
+  sh 'foreman run irb'
+end
