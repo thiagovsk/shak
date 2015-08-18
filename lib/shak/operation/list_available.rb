@@ -14,7 +14,7 @@ module Shak
             name: cookbook.name,
             description: cookbook.description,
             long_description: cookbook.long_description,
-          })
+          }) unless ['shak', 'ssl'].include?(cookbook.name)
         end
       end
     end
