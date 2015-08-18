@@ -1,0 +1,12 @@
+h1 All available apps
+
+- @available.each do |cookbook|
+  div.app
+    div class="app-icon app-icon-#{cookbook[:name]}"
+      a href="/add/#{cookbook[:name]}"
+    div.app-info
+      h3: a href="/add/#{cookbook[:name]}"
+        = cookbook[:name]
+      p= cookbook[:description]
+    div.app-controls
+      a.install role='button' href="/add/#{cookbook[:name]}"= _('Install')

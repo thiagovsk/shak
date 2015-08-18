@@ -2,6 +2,7 @@ require 'sinatra'
 require 'shak/web/slim'
 
 require 'shak/operation/list'
+require 'shak/operation/list_available'
 
 module Shak
 
@@ -31,16 +32,26 @@ module Shak
         slim :index
       end
 
+      # Browse available apps
+      get '/browse' do
+        @available = []
+        list = Shak::Operation::ListAvailable.new do |app|
+          @available << app
+        end
+        list.perform
+
+        slim :browse
+      end
+
+      # Displays form to add a new app
+      get '/add' do
+        true
+      end
+
       # Adds a new app
       post '/' do
         # TODO
         true
-      end
-
-      # Browse available apps
-      get '/add' do
-        # TODO
-        # true
       end
 
       # views an installed app
