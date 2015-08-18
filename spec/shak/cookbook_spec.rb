@@ -22,8 +22,19 @@ describe Shak::Cookbook do
     end
   end
 
+  let(:shak) do
+    Shak::Cookbook['shak']
+  end
   it 'has a path' do
-    expect(Shak::Cookbook['shak'].path).to be_a(String)
+    expect(shak.path).to be_a(String)
+  end
+
+  it 'has a description' do
+    expect(shak.description).to be_a(String)
+  end
+
+  it 'has a long description' do
+    expect(shak.long_description).to be_a(String)
   end
 
 end

@@ -1,3 +1,5 @@
+require 'forwardable'
+
 require 'shak'
 require 'shak/cookbook_input'
 
@@ -49,11 +51,39 @@ module Shak
       end
     end
 
+    METADATA_FIELDS = [
+      :description,
+      :long_description,
+      :version,
+      :depends,
+      :maintainer,
+      :maintainer_email,
+      :license,
+    ]
+    attr_reader :metadata
+
+    extend Forwardable
+    delegate METADATA_FIELDS => :metadata
+
     private
+
+    class Metadata
+      def initialize(path)
+        file = File.join(path, 'metadata.rb')
+        instance_eval(File.read(file), file, 1) if File.exists?(file)
+      end
+      ([:name] + METADATA_FIELDS).each do |attr|
+        define_method(attr) do |v=nil|
+          instance_variable_set("@#{attr}", v) if v
+          instance_variable_get("@#{attr}")
+        end
+      end
+    end
 
     def initialize(name)
       @name = name
       @path = File.join(self.class.path, name)
+      @metadata = Metadata.new(@path)
     end
 
   end
