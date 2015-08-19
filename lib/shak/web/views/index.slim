@@ -1,11 +1,12 @@
-h1 My apps
+h1= _('Installed apps')
 - @apps.each do |app|
   div.app
     div class="app-icon app-icon-#{app[:name]}"
       a href=app[:link]
     div.app-info
-      h3: a href=app[:link] = app[:id]
-      / FIXME
-      | Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum pharetra nisi quis justo tincidunt, sed dictum neque rhoncus. Aliquam in nisl a sem tempus feugiat. Ut lacinia vulputate orci at gravida.
+      h3
+        a href=app[:link] = app[:id]
+        small
+          em= ' ' + app[:name]
     div.app-controls
       a.edit role='button' href="/#{app[:id]}"= _("Edit")
