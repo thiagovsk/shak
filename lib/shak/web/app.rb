@@ -44,8 +44,9 @@ module Shak
       end
 
       # Displays form to add a new app
-      get '/add' do
-        true
+      get '/add/:cookbook' do
+        @cookbook = Shak::Cookbook[params[:cookbook]]
+        slim :add
       end
 
       # Adds a new app

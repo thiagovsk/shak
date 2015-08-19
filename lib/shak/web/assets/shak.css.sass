@@ -35,6 +35,18 @@ div.app-controls
     &.install
       @extend .btn-success
 
+form
+  .input
+    @extend .row
+    .field
+      @extend .col-md-6
+      @extend .form-group
+      input
+        @extend .form-control
+  button[type=submit]
+    @extend .btn
+    @extend .btn-primary
+
 footer
   @extend .navbar-default
   height: 100px
