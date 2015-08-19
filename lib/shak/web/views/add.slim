@@ -1,4 +1,6 @@
-h1= _('Add application')
+h1= _('Add application: %s') % @cookbook.name
+
+.info= @cookbook.long_description
 
 form action="/" method="POST"
 
