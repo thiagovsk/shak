@@ -46,6 +46,7 @@ Gem::Specification.new do |spec|
   spec.add_runtime_dependency 'redcarpet'
   spec.add_runtime_dependency 'sprockets'
 
-  # web frontend test dependencies
+  # web frontend development/test dependencies
+  spec.add_development_dependency "foreman"
   spec.add_development_dependency "rack-test"
 end

@@ -3,5 +3,6 @@ runtime:
   - sudo
 dev:
   - rerun
+  - ruby-foreman
 test:
   - curl
