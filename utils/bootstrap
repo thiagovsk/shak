@@ -6,7 +6,7 @@ if [ -d /vagrant ]; then
   cd /vagrant
 fi
 
-sudo DEBIAN_FRONTEND=noninteractive apt-get install -qy grep-dctrl
+sudo DEBIAN_FRONTEND=noninteractive apt-get install -qy grep-dctrl $(utils/deps dev)
 
 packages=$(grep-dctrl -n -s Build-Depends,Depends '' debian/control  | sed -e 's/(.*)//; s/|.*//; /\$/d; s/,\s*//')
 
