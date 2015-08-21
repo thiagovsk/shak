@@ -7,7 +7,8 @@
 # you're doing.
 Vagrant.configure(2) do |config|
   config.vm.box = ENV.fetch('BOX', "debian/stretch64")
-  config.vm.network "forwarded_port", guest: 80, host: 8080 # actual web server
+  config.vm.network "forwarded_port", guest: 80, host: 8080 # web server
+  config.vm.network "forwarded_port", guest: 443, host: 8443 # web server (SSL)
   config.vm.network "forwarded_port", guest: 3000, host: 3000 # shak web UI
   config.vm.provision :shell do |shell|
     shell.privileged = false
