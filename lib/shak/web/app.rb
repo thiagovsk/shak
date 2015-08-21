@@ -4,6 +4,7 @@ require 'shak/web/slim'
 require 'shak/operation/list'
 require 'shak/operation/list_available'
 require 'shak/operation/install'
+require 'shak/operation/config'
 
 module Shak
 
@@ -46,7 +47,8 @@ module Shak
 
       # Displays form to add a new app
       get '/add/:cookbook' do
-        @cookbook = Shak::Cookbook[params[:cookbook]]
+        install = Shak::Operation::Install.new(params[:cookbook])
+        @application = install.application
         slim :add
       end
 
@@ -61,8 +63,9 @@ module Shak
 
       # views an installed app
       get '/:id' do
-        # TODO
-        true
+        config = Shak::Operation::Config.new(params[:id])
+        @application = config.application
+        slim :edit
       end
 
       # updates an installed app
