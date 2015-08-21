@@ -53,6 +53,10 @@ describe Shak::Application do
       allow(app).to receive(:input_data).and_return(hostname: 'foo.com')
       expect(app.label).to eq('[foo.com]')
     end
+    it 'removes trailing slash from label' do
+      allow(app).to receive(:label_format).and_return('foo.com/')
+      expect(app.label).to eq('foo.com')
+    end
   end
 
 end

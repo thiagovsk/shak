@@ -74,7 +74,8 @@ module Shak
     end
 
     def label
-      label_format % input_data.map { |k,v| { k.to_sym => v } }.reduce(&:merge)
+      data = input_data.map { |k,v| { k.to_sym => v } }.reduce(&:merge)
+      (label_format % data).gsub(%r{/$}, '')
     end
 
     def label_format
