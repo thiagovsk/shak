@@ -1,12 +1,29 @@
 require 'tempfile'
 require 'json'
 
+require 'listen'
+
 require 'shak'
+require 'shak/config'
 require 'shak/operation/base'
 
 module Shak
   module Operation
     class ApplyConfiguration < Base
+
+      def listen
+        listener = Listen.to(Shak::Config.data_dir) do |_,_,_|
+          perform
+        end
+        listener.start
+        while true
+          begin
+            sleep 0.5
+          rescue Interrupt
+            exit
+          end
+        end
+      end
 
       def perform
         solo_config = generate_solo_configuration
