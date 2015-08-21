@@ -3,6 +3,10 @@
 server {
   server_name <%= @hostname %>;
 
+  listen 443 ssl;
+  ssl_certificate       /etc/ssl/certs/<%= @hostname %>.pem;
+  ssl_certificate_key   /etc/ssl/private/<%= @hostname %>.key;
+
   access_log            /var/log/nginx/<%= @hostname %>.access.log;
   error_log             /var/log/nginx/<%= @hostname %>.error.log;
 
