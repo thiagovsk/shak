@@ -1,5 +1,6 @@
 require 'sprockets'
 require 'bootstrap-sass'
+require 'coffee_script'
 
 require 'shak/web/app'
 
