@@ -14,5 +14,9 @@ text :user do
   title 'User'
   default 'root'
 end
+text :group do
+  title 'Group'
+  default 'root'
+end
 
 unique :hostname, :path

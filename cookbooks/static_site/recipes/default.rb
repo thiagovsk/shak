@@ -12,7 +12,10 @@ each_instance_of('static_site') do |app|
 
   directory app['directory'] do
     recursive true
-    owner app['user']
+  end
+
+  execute 'chown on ' + app['directory'] do
+    command "chown -R #{app['user']}:#{app['group']} #{app['directory']}"
   end
 
   index = File.join(app['directory'], 'index.html')
