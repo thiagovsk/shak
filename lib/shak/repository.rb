@@ -8,6 +8,8 @@ module Shak
     extend Forwardable
     delegate [:each, :map] => :all
 
+    attr_accessor :timestamp
+
     def run_list
       preamble_recipes + user_recipes + postamble_recipes
     end

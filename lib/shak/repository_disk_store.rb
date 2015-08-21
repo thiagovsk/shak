@@ -33,9 +33,24 @@ module Shak
         app = File.open(data) do |f|
           app_reader.read(f)
         end
+        app.timestamp = File.stat(data).mtime
         repository.add(app)
       end
+
+      if File.exist?(deploy_timestamp_file)
+        repository.timestamp = File.stat(deploy_timestamp_file).mtime
+      end
+
       repository
+    end
+
+    def add_deploy_timestamp
+      FileUtils.mkdir_p(Shak.config.repository_dir)
+      FileUtils.touch(deploy_timestamp_file)
+    end
+
+    def deploy_timestamp_file
+      File.join(Shak.config.repository_dir, 'deployment.stamp')
     end
 
     private

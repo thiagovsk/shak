@@ -50,6 +50,23 @@ describe Shak::RepositoryDiskStore do
       expect(@from_disk).to eq(repository)
     end
 
+    it 'reads application timestamps' do
+      timestamps = @from_disk.map(&:timestamp).map(&:class).uniq
+      expect(timestamps).to eq([Time])
+    end
+  end
+
+  context 'marking deployment timestamp' do
+    it 'creates timestamp file' do
+      store.add_deploy_timestamp
+      expect(File).to exist(store.deploy_timestamp_file)
+    end
+    it 'reads timestamp file' do
+      store.add_deploy_timestamp
+
+      from_disk = store.read
+      expect(from_disk.timestamp).to be_a(Time)
+    end
   end
 
 end

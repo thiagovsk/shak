@@ -1,5 +1,6 @@
-require 'tempfile'
+require 'fileutils'
 require 'json'
+require 'tempfile'
 
 require 'listen'
 
@@ -33,6 +34,7 @@ module Shak
           '--json-attributes', json_attributes,
           '--config', solo_config
         )
+        store.add_deploy_timestamp
       end
 
       protected

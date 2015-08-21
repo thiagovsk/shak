@@ -8,6 +8,7 @@ describe Shak::Operation::ApplyConfiguration do
 
   let(:apply) { Shak::Operation::ApplyConfiguration.new }
   let(:repository) { apply.send(:repository) }
+  let(:store) { apply.send(:store) }
 
   context 'creating node attributes file' do
     before(:each) do
@@ -48,6 +49,8 @@ describe Shak::Operation::ApplyConfiguration do
     expect(apply).to receive(:generate_solo_configuration).and_return('/path/to/config')
 
     expect(Shak).to receive(:run).with('sudo', 'chef-solo', '--json-attributes', '/path/to/json', '--config', '/path/to/config')
+
+    expect(store).to receive(:add_deploy_timestamp)
 
     apply.perform
   end

@@ -13,6 +13,7 @@ class Shak::Operation::List < Shak::Operation::Base
         id: app.id,
         label: app.label,
         link: link_to(app),
+        status: status(app),
       })
     end
   end
@@ -24,6 +25,18 @@ class Shak::Operation::List < Shak::Operation::Base
       "http://#{app.hostname}#{app.path}"
     else
       nil
+    end
+  end
+
+  def status(app)
+    if app.timestamp && repository.timestamp
+      if app.timestamp > repository.timestamp
+        :outdated
+      else
+        :uptodate
+      end
+    else
+      :outdated
     end
   end
 

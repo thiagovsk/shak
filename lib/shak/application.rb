@@ -14,6 +14,7 @@ module Shak
 
     attr_accessor :name
     attr_accessor :id
+    attr_accessor :timestamp
 
     def initialize(name, id=nil)
       @name = name

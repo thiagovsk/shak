@@ -9,10 +9,10 @@ command :list do |c|
     fail_usage(c) if args.size != 0
 
     table = Text::Table.new
-    table.head = ['Application', 'Id', 'Link']
+    table.head = ['Application', 'Id', 'Link', 'Status']
 
     list = Shak::Operation::List.new do |app|
-      table.rows << [app[:name], app[:id], app[:link]]
+      table.rows << [app[:name], app[:id], app[:link], app[:status]]
     end
     list.perform
 
