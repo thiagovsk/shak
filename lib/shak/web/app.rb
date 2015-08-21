@@ -1,3 +1,4 @@
+require 'json'
 require 'sinatra'
 require 'shak/web/slim'
 
@@ -32,6 +33,17 @@ module Shak
         list.perform
 
         slim :index
+      end
+
+      get '/status' do
+        apps = []
+        list = Shak::Operation::List.new do |app|
+          apps << app
+        end
+        list.perform
+
+        headers['Content-Type'] = 'application/json'
+        apps.to_json
       end
 
       # Browse available apps

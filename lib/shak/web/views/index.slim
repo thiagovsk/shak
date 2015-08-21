@@ -1,6 +1,6 @@
 h1= _('Installed apps')
 - @apps.each do |app|
-  div.app
+  div.app id=app[:id]
     div class="app-icon app-icon-#{app[:name]}"
       a href=app[:link]
     div.app-info
@@ -9,6 +9,8 @@ h1= _('Installed apps')
         - if app[:label] != app[:name]
           small
             em= ' (%s)' % app[:name]
+        - if app[:status] == :outdated
+          span.status.outdated
     div.app-controls
       a.button.edit role='button' href="/#{app[:id]}"= _("Edit")
 

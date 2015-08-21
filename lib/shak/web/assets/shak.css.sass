@@ -1,5 +1,7 @@
 @import bootstrap
 
+$green: #4e9a06
+
 #content
   @extend .container
   padding-bottom: 15px
@@ -37,6 +39,20 @@ div.app
 .info
   @extend .alert
   @extend .alert-info
+
+
+.status
+  display: inline-block
+  width: 16px
+  height: 16px
+  margin-left: 16px
+  &.outdated
+    background: url(loading.gif) no-repeat
+  &.uptodate
+    @extend .glyphicon
+    @extend .glyphicon-ok
+    color: $green
+
 
 form
   .input

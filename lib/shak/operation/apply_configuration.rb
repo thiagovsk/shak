@@ -13,7 +13,7 @@ module Shak
     class ApplyConfiguration < Base
 
       def listen
-        listener = Listen.to(Shak::Config.data_dir) do |_,_,_|
+        listener = Listen.to(Shak.config.data_dir, ignore: /\.stamp/) do |_,_,_|
           perform
         end
         listener.start
