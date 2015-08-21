@@ -3,12 +3,13 @@ h1= _('Add application: %s') % @cookbook.name
 .info= @cookbook.long_description
 
 form action="/" method="POST"
+  input type='hidden' name='cookbook' value=@cookbook.name
 
   - @cookbook.input.fields.each do |input|
     .input
       .field
         label for="input_#{input.name}"= input.title
         / FIXME: there will be other types of fields
-        input type="text" id="input_#{input.name}" name=input.name
+        input type="text" id="input_#{input.name}" name="input_data[#{input.name}]"
 
   button type="submit"= _('Confirm')

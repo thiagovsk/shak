@@ -3,6 +3,7 @@ require 'shak/web/slim'
 
 require 'shak/operation/list'
 require 'shak/operation/list_available'
+require 'shak/operation/install'
 
 module Shak
 
@@ -51,8 +52,11 @@ module Shak
 
       # Adds a new app
       post '/' do
-        # TODO
-        true
+        cookbook = params[:cookbook]
+        install = Shak::Operation::Install.new(cookbook)
+        install.input_data = params[:input_data]
+        install.perform
+        redirect to('/')
       end
 
       # views an installed app
