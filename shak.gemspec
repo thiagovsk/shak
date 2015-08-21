@@ -10,7 +10,7 @@ knowledge to maintain their own servers at home or in the cloud. shak is
 opininated; it will setup applications based on distribution packages,
 and in the most secure way possible.
 
-shak IS STILL ALPHA SOFTWARE, AND SHOULD NOT BE USED IN PRODUCTION YET.
+shak is still alpha software, and should not be used in production.
 EOF
 
 Gem::Specification.new do |spec|

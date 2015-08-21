@@ -45,4 +45,4 @@ Description: tool for installing and configuring server applications
  opininated; it will setup applications based on distribution packages,
  and in the most secure way possible.
  .
- shak IS STILL ALPHA SOFTWARE, AND SHOULD NOT BE USED IN PRODUCTION YET.
+ shak is still alpha software, and should not be used in production.
