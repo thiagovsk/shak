@@ -45,6 +45,9 @@ describe Shak::Application do
       expect(app).to_not receive(:path=)
       app.input_data = { 'path' => '' }
     end
+    it 'ignores nil input data' do
+      app.input_data = nil
+    end
   end
 
   context 'producing labels' do
