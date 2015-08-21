@@ -11,8 +11,22 @@ module Shak
     def write(repository)
       FileUtils.mkdir_p(Shak.config.repository_dir)
       repository.each do |app|
-        File.open(application_file(app), 'w') do |f|
-          Shak::ApplicationSerializer.new.serialize(app, f)
+        serializer = Shak::ApplicationSerializer.new
+        file = application_file(app)
+        skip = false
+
+        if File.exist?(file)
+          data = serializer.read(File.read(file)).input_data
+          if data == app.input_data
+            # data on-disk is the same, no need to write again
+            skip = true
+          end
+        end
+
+        unless skip
+          File.open(file, 'w') do |f|
+            serializer.serialize(app, f)
+          end
         end
       end
       repository.removed.each do |app|
