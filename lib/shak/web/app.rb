@@ -70,8 +70,10 @@ module Shak
 
       # updates an installed app
       post '/:id' do
-        # TODO
-        true
+        config = Shak::Operation::Config.new(params[:id])
+        config.input_data = params[:input_data]
+        config.perform
+        redirect to('/')
       end
 
       # removes an installed app
