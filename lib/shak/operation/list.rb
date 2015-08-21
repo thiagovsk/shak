@@ -11,6 +11,7 @@ class Shak::Operation::List < Shak::Operation::Base
       @callback.call({
         name: app.name,
         id: app.id,
+        label: app.label,
         link: link_to(app),
       })
     end

@@ -39,4 +39,20 @@ describe Shak::Application do
     end
   end
 
+  context 'producing labels' do
+    let(:app) do
+      fake_cookbook('app1')
+      Shak::Application.new('app1')
+    end
+    it 'tolerates no label_format from input' do
+      allow(app.input).to receive(:label_format).and_return(nil)
+      expect(app.label).to eq('app1')
+    end
+    it 'interpolates input into label' do
+      allow(app.input).to receive(:label_format).and_return('[%{hostname}]')
+      allow(app).to receive(:input_data).and_return(hostname: 'foo.com')
+      expect(app.label).to eq('[foo.com]')
+    end
+  end
+
 end

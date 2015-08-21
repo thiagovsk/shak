@@ -58,6 +58,11 @@ module Shak
       fields == other.fields
     end
 
+    def label_format(format=nil)
+      @label_format = format if format
+      @label_format
+    end
+
     private
 
     def __add_field__(name, type, &block)

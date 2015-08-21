@@ -73,6 +73,14 @@ module Shak
       end
     end
 
+    def label
+      label_format % input_data.map { |k,v| { k.to_sym => v } }.reduce(&:merge)
+    end
+
+    def label_format
+      input.label_format || name
+    end
+
     def ==(other)
       [ :name, :id, :input ].all? { |attr| self.send(attr) == other.send(attr) }
     end

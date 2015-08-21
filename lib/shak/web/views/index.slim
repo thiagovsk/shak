@@ -5,8 +5,9 @@ h1= _('Installed apps')
       a href=app[:link]
     div.app-info
       h3
-        a href=app[:link] = app[:id]
-        small
-          em= ' ' + app[:name]
+        a href=app[:link] = app[:label]
+        - if app[:label] != app[:name]
+          small
+            em= ' (%s)' % app[:name]
     div.app-controls
       a.edit role='button' href="/#{app[:id]}"= _("Edit")

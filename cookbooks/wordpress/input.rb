@@ -8,4 +8,6 @@ text :path do
   default '/'
 end
 
+label_format '%{hostname}%{path}'
+
 unique :hostname, :path

@@ -8,6 +8,8 @@ text :path do
   default '/'
 end
 
+label_format '%{hostname}%{path}'
+
 text :user do
   title 'User'
   default 'root'
