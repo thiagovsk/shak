@@ -1,4 +1,3 @@
 h1= _('Edit application: %s') % @application.label
-
-== slim :form
-
+form action="/#{@application.id}" method="POST"
+  == slim :form

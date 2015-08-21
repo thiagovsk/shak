@@ -1,16 +1,13 @@
 .info= @application.cookbook.long_description
 
-form action="/" method="POST"
-  input type='hidden' name='cookbook' value=@application.cookbook.name
+- @application.input.fields.each do |input|
+  .input
+    .field
+      label for="input_#{input.name}"= input.title
+      / FIXME: there will be other types of fields
+      input type="text" id="input_#{input.name}" name="input_data[#{input.name}]" value=@application.send(input.name)
 
-  - @application.input.fields.each do |input|
-    .input
-      .field
-        label for="input_#{input.name}"= input.title
-        / FIXME: there will be other types of fields
-        input type="text" id="input_#{input.name}" name="input_data[#{input.name}]" value=@application.send(input.name)
-
-  .buttons
-    button type="submit"  => _('Confirm')
-    a.cancel href=to('/') => _('Cancel')
+.buttons
+  button type="submit"  => _('Confirm')
+  a.cancel href=to('/') => _('Cancel')
 

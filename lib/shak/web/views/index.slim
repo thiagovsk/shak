@@ -10,4 +10,9 @@ h1= _('Installed apps')
           small
             em= ' (%s)' % app[:name]
     div.app-controls
-      a.edit role='button' href="/#{app[:id]}"= _("Edit")
+      a.button.edit role='button' href="/#{app[:id]}"= _("Edit")
+
+- if @apps.empty?
+  .info
+    => _('No applications currently installed.')
+  a.button.install href=to('/browse') => _('Install one now')

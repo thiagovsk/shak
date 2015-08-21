@@ -1,3 +1,4 @@
 h1= _('Add application: %s') % @application.cookbook.name
-
-== slim :form
+form action="/" method="POST"
+  input type='hidden' name='cookbook' value=@application.cookbook.name
+  == slim :form
