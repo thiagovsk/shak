@@ -1,6 +1,7 @@
 # non-Ruby dependencies (Debian packages)
 runtime:
   - sudo
+  - libjs-jquery
 dev:
   - rerun
   - ruby-foreman

@@ -5,6 +5,7 @@ Maintainer: Antonio Terceiro <terceiro@debian.org>
 Build-Depends: chef,
                debhelper (>= 9~),
                gem2deb,
+               libjs-jquery,
                rake,
                ruby-bootstrap-sass,
                ruby-coffee-script,
@@ -28,6 +29,7 @@ Package: shak
 Architecture: all
 XB-Ruby-Versions: ${ruby:Versions}
 Depends: chef,
+         libjs-jquery,
          ruby | ruby-interpreter,
          ruby-bootstrap-sass,
          ruby-coffee-script,
