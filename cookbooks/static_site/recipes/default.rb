@@ -6,6 +6,8 @@ class Chef::Resource::Template
   end
 end
 
+package 'rsync'
+
 each_instance_of('static_site') do |app|
 
   app['directory'] = ::File.join('/srv', web_app_id(app))
