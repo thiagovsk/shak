@@ -2,16 +2,30 @@
 
 set -e
 
+ssh_config=$(mktemp)
+vagrant ssh-config > "$ssh_config"
+address=$(awk '{ if ($1 == "HostName") { print($2) } }' "$ssh_config")
+port=$(awk '{ if ($1 == "Port") { print($2) } }' "${ssh_config}")
+
 sudo -v
+sudo redir --lport 22  --cport $port --caddr $address &
 sudo redir --lport 80  --cport 8080 &
 sudo redir --lport 443 --cport 8443 &
 
 cleanup() {
   sudo -v
-  sudo pkill -9 redir
+  set -x
+  sudo pkill -f 'lport 22'
+  sudo pkill -f 'lport 80'
+  sudo pkill -f 'lport 443'
+  rm -f "$ssh_config"
 }
 
-echo "Forwarding ports 80 and 443"
+echo "Forwarding ports SSH, HTTP an HTTPS"
+echo "SSH: pid $sshpid"
+echo "HTTP: pid $httppid"
+echo "HTTPS: pid $httpspid"
+echo
 echo "Hit ctrl-c to stop"
 echo
 trap cleanup INT TERM EXIT
