@@ -37,6 +37,14 @@ describe Shak::Application do
       expect(app.has_key?('foo')).to be true
       expect(app.has_key?(:foo)).to be true
     end
+    it 'does not set nil values' do
+      expect(app).to_not receive(:path=)
+      app.input_data = { 'path' => nil }
+    end
+    it 'does not set empty values' do
+      expect(app).to_not receive(:path=)
+      app.input_data = { 'path' => '' }
+    end
   end
 
   context 'producing labels' do

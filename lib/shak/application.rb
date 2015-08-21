@@ -55,7 +55,7 @@ module Shak
 
     def input_data=(data)
       data.each do |field,value|
-        send("#{field}=", value)
+        send("#{field}=", value) if value && !value.empty?
       end
     end
 
