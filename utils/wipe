@@ -1,0 +1,14 @@
+#!/bin/sh
+
+set -ex
+
+for db in $(sudo -u postgres psql --tuples-only --command "select datname from pg_database where datistemplate = false and datname != 'postgres' ;"); do
+  sudo -u postgres dropdb $db
+done
+for db in $(ls -1d /var/lib/mysql/wordpress_*); do
+  mysqladmin drop $(basename $db)
+done
+rm -rf /var/lib/wordpress/wordpress_*
+rm -rf /var/lib/shak/*
+rm -rf /vagrant/tmp/repository
+rm -rf /srv/*
