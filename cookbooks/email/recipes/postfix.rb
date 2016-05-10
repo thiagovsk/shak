@@ -1,3 +1,4 @@
+package 'procmail'
 package 'postfix'
 package 'bsd-mailx'
 service 'postfix'
@@ -11,7 +12,7 @@ template '/etc/postfix/main.cf' do
   user  'root'
   group 'root'
   mode  '0644'
-  source  'master_main.cf.erb'
+  source  'main.cf.erb'
   variables :domains => domains
   notifies  :restart, 'service[postfix]'
 end
